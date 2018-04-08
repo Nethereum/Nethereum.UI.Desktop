@@ -1,0 +1,22 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Nethereum.UI.ViewModels;assembly=Nethereum.UI" 
+             xmlns:vmDesign="clr-namespace:Nethereum.UI.Desktop.Views;assembly=Nethereum.UI.Desktop"
+             >
+  <Design.DataContext>
+    <vmDesign:AccountViewModelDesigner/>
+  </Design.DataContext>
+  
+  <Grid ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="Auto, Auto, Auto, Auto" Margin="16">
+    <TextBlock Text="Account Address:" Classes="formLabel" Grid.Column="0" Grid.Row="0" />
+    <TextBlock Text="{Binding Address}" Classes="formValue" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"/>
+    <TextBlock Text="Private Key:" Classes="formLabel" Grid.Column="0" Grid.Row="1"/>
+    <TextBlock Text="{Binding PrivateKey}" TextWrapping="Wrap" Classes="formValue" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+    <TextBlock Text="Balance In Ether:" Classes="formLabel" Grid.Column="0" Grid.Row="2"/>
+    <TextBlock Text="{Binding Balance}" Classes="formValue" Grid.Column="1" Grid.Row="2"/>
+    <Button Content="Refresh Balance" Classes="formMainAction" Command="{Binding RefreshBalanceCommand}"
+            Grid.Column="3" Grid.Row="2" />
+    <TextBlock Text="Url:" Classes="formLabel" Grid.Column="0" Grid.Row="3"/>
+    <TextBox Text="{Binding Url}"  Classes="formTextBox" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"/>
+  </Grid>
+</UserControl>

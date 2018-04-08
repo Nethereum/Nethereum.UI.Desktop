@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Nethereum.UI\Nethereum.UI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Genesis.Ensure" Version="2.0.0" />
+    <PackageReference Include="Nethereum.HdWallet" Version="2.4.0" />
+    <PackageReference Include="Nethereum.Web3" Version="2.4.0" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
+    <PackageReference Include="ReactiveUI" Version="7.4.0" />
+    <PackageReference Include="reactiveui-core" Version="7.4.0" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="ReactiveUI" Version="8.0.0-alpha0117" />
+  </ItemGroup>
+</Project>

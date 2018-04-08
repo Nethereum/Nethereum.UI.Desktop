@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Genesis.Ensure" Version="2.0.0" />
+    <PackageReference Include="Nethereum.HdWallet" Version="2.4.0" />
+    <PackageReference Include="Nethereum.Web3" Version="2.4.0" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="ReactiveUI" Version="8.0.0-alpha0117" />
+  </ItemGroup> 
+</Project>

@@ -1,0 +1,15 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Nethereum.UI.Desktop.ViewModels;assembly=Nethereum.UI.Desktop"
+             xmlns:controlsStandardToken="clr-namespace:Nethereum.UI.Desktop.Views.StandardToken;assembly=Nethereum.UI.Desktop"
+             >
+  <Design.DataContext>
+    <vm:StandardTokenViewModel/>
+  </Design.DataContext>
+   
+  <Grid ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="Auto, Auto, Auto, Auto">
+    <controlsStandardToken:StandardTokenContractAddressUserControl DataContext="{Binding Path=StandardTokenContractAddressViewModel}" Grid.Row="0"/>
+    <controlsStandardToken:StandardTokenBalanceOfUserControl DataContext="{Binding Path=StandardTokenBalanceOfViewModel}" Grid.Row="1"/>
+    <controlsStandardToken:StandardTokenTransferUserControl DataContext="{Binding Path=StandardTokenTransferViewModel}" Grid.Row="2"/>
+  </Grid>
+</UserControl>

@@ -1,0 +1,45 @@
+﻿<Window Width="1000" xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:Nethereum.UI.Desktop.ViewModels;assembly=Nethereum.UI.Desktop"
+        xmlns:controls="clr-namespace:Nethereum.UI.Desktop.Views;assembly=Nethereum.UI.Desktop"
+        xmlns:controlsStandardToken="clr-namespace:Nethereum.UI.Desktop.Views.StandardToken;assembly=Nethereum.UI.Desktop"
+        Icon="resm:Nethereum.UI.Desktop.Assets.avalonia-logo.ico"
+        Title="Nethereum Simple Wallet">
+  <Design.DataContext> 
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
+  <Grid RowDefinitions="Auto, Auto" Background="{DynamicResource ThemeAccentBrush4}">
+    <controls:AccountUserControl HorizontalAlignment="Left" Width="600" DataContext="{Binding AccountViewModel}"/>
+    <Border Background="{DynamicResource ThemeAccentBrush4}"
+             CornerRadius="15" Margin="5"
+             Padding="16" Grid.Row="1">
+      <TabControl Classes="mainTab"  >
+        <TabItem Header="Load Accounts" >
+          <Border Background="{DynamicResource ThemeAccentBrush4}"
+                CornerRadius="15"
+                Margin="5"
+                Padding="16">
+            <TabControl Classes="mainTab">
+              <TabItem Header="Load Account From Private Key">
+                <controls:PrivateKeyAccountLoaderUserControl HorizontalAlignment="Left" Width="420" DataContext="{Binding PrivateKeyLoaderViewModel}"/>
+              </TabItem>
+              <TabItem Header="Load Account From Key Store">
+                <controls:KeystoreAccountLoaderUserControl HorizontalAlignment="Left" DataContext="{Binding KeyStoreLoaderViewModel}"/>
+              </TabItem>
+              <TabItem Header="Load Account From Hd Wallet">
+              </TabItem>
+            </TabControl>
+          </Border>
+        </TabItem>
+        <TabItem Header="Send Ether / Transaction / Standard Token ">
+          <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto,*">
+            <controls:SendTransactionUserControl HorizontalAlignment="Left" DataContext="{Binding SendTransactionViewModel}" Grid.Row="0"/>
+            <controlsStandardToken:StandardTokenUserControl HorizontalAlignment="Left" Margin="20" DataContext="{Binding StandardTokenViewModel}" Grid.Column="1" />
+            <controls:TransactionsUserControl HorizontalAlignment="Left" DataContext="{Binding TransactionsViewModel}" Grid.Row="1" Grid.ColumnSpan="2"/>
+          </Grid>
+        </TabItem>
+      </TabControl>
+    </Border>
+  </Grid>
+  
+</Window>

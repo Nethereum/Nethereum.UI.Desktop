@@ -1,0 +1,14 @@
+c:\users\juanf\source\repos\AvaloniaUIPlayground\AvaloniaUIPlayground\bin\Debug\netcoreapp2.0\AvaloniaUIPlayground.deps.json
+c:\users\juanf\source\repos\AvaloniaUIPlayground\AvaloniaUIPlayground\bin\Debug\netcoreapp2.0\AvaloniaUIPlayground.runtimeconfig.json
+c:\users\juanf\source\repos\AvaloniaUIPlayground\AvaloniaUIPlayground\bin\Debug\netcoreapp2.0\AvaloniaUIPlayground.runtimeconfig.dev.json
+c:\users\juanf\source\repos\AvaloniaUIPlayground\AvaloniaUIPlayground\bin\Debug\netcoreapp2.0\AvaloniaUIPlayground.dll
+c:\users\juanf\source\repos\AvaloniaUIPlayground\AvaloniaUIPlayground\bin\Debug\netcoreapp2.0\AvaloniaUIPlayground.pdb
+c:\users\juanf\source\repos\AvaloniaUIPlayground\AvaloniaUIPlayground\obj\Debug\netcoreapp2.0\AvaloniaUIPlayground.csprojResolveAssemblyReference.cache
+c:\users\juanf\source\repos\AvaloniaUIPlayground\AvaloniaUIPlayground\obj\Debug\netcoreapp2.0\AvaloniaUIPlayground.csproj.CoreCompileInputs.cache
+c:\users\juanf\source\repos\AvaloniaUIPlayground\AvaloniaUIPlayground\obj\Debug\netcoreapp2.0\AvaloniaUIPlayground.AssemblyInfoInputs.cache
+c:\users\juanf\source\repos\AvaloniaUIPlayground\AvaloniaUIPlayground\obj\Debug\netcoreapp2.0\AvaloniaUIPlayground.AssemblyInfo.cs
+c:\users\juanf\source\repos\AvaloniaUIPlayground\AvaloniaUIPlayground\obj\Debug\netcoreapp2.0\AvaloniaUIPlayground.dll
+c:\users\juanf\source\repos\AvaloniaUIPlayground\AvaloniaUIPlayground\obj\Debug\netcoreapp2.0\AvaloniaUIPlayground.pdb
+c:\users\juanf\source\repos\AvaloniaUIPlayground\AvaloniaUIPlayground\bin\Debug\netcoreapp2.0\Nethereum.UI.dll
+c:\users\juanf\source\repos\AvaloniaUIPlayground\AvaloniaUIPlayground\bin\Debug\netcoreapp2.0\Nethereum.UI.pdb
+c:\users\juanf\source\repos\AvaloniaUIPlayground\AvaloniaUIPlayground\obj\Debug\netcoreapp2.0\AvaloniaUIPlayground.csproj.CopyComplete

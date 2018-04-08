@@ -1,0 +1,30 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:Nethereum.UI.Desktop.Converters;assembly=Nethereum.UI.Desktop"
+             xmlns:vmDesign="clr-namespace:Nethereum.UI.Desktop.Views.StandardToken.Designers;assembly=Nethereum.UI.Desktop"
+             >
+  <Design.DataContext>
+    <vmDesign:StandardTokenTransferViewModelDesigner/>
+  </Design.DataContext>
+  <UserControl.Resources>
+    <conv:NullableDecimalConverter x:Key="nullableDecimalConverter"/>
+    <conv:NullableUInt64Converter x:Key="nullableUInt64Converter"/>
+  </UserControl.Resources>
+  
+  <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto">
+    <TextBlock Text="To Address:" Classes="formLabel" Grid.Column="0" Grid.Row="0" />
+    <TextBox Text="{Binding AddressTo}" Classes="formTextBox" Grid.Column="1" Grid.Row="0"/>
+    
+    <TextBlock Text="Token Amount:" Classes="formLabel" Grid.Column="0" Grid.Row="1"/>
+    <TextBox Text="{Binding Amount, Converter={StaticResource nullableDecimalConverter}}"  Classes="formTextBox" Grid.Column="1" Grid.Row="1"/>
+
+    <TextBlock Text="Gas (Optional calculated):" Classes="formLabel" Grid.Column="0" Grid.Row="2"/>
+    <TextBox Text="{Binding Gas, Converter={StaticResource nullableUInt64Converter}}"  Classes="formTextBox" Grid.Column="1" Grid.Row="2"/>
+
+    <TextBlock Text="Gas Price:" Classes="formLabel" Grid.Column="0" Grid.Row="3"/>
+    <TextBox Text="{Binding GasPrice, Converter={StaticResource nullableUInt64Converter}}"  Classes="formTextBox" Grid.Column="1" Grid.Row="3"/>
+
+    <Button Content="Send Transaction" Classes="formMainAction" Command="{Binding ExecuteTransactionCommand}"
+            Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" />
+  </Grid>
+</UserControl>
