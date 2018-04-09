@@ -1,7 +1,6 @@
 # Nethereum UI Desktop Simple Wallet
 
-Functional sample of a Reactive Cross platform desktop wallet connecting to Ethereum using Ethereum. 
-The sample provides a cross platform Desktop port using Avalonia and ReactiveUI. 
+Functional sample of a Reactive Cross platform desktop wallet connecting to Ethereum using Nethereum, Avalonia and ReactiveUI. 
 
 The sample provides an overview of loading accounts from different sources (KeyStore, HdWallet backup words, Private Key) and overall interaction with Ethereum to send transactions and interact with a standard token contract.
 
