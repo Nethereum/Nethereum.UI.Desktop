@@ -15,7 +15,7 @@ NOTE: The sample is not the a hardened solution so there is no error handling, t
 
 ## Screenshots
 
-![Ubuntu Load From KeyStore](Screenshots/ubuntu2.PNG)
-![Ubuntu Transfer Sample](screenshots/ubuntu1.PNG)
-![Mac Load From KeyStore](Screenshots/mac1.PNG)
-![Mac Transfer Sample](screenshots/mac2.PNG)
+![Ubuntu Load From KeyStore](Screenshots/ubuntu2.png)
+![Ubuntu Transfer Sample](Screenshots/ubuntu1.png)
+![Mac Load From KeyStore](Screenshots/mac1.png)
+![Mac Transfer Sample](Screenshots/mac2.png)
