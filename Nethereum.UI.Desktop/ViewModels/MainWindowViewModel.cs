@@ -75,7 +75,9 @@ namespace Nethereum.UI.Desktop.ViewModels
            SendTransactionViewModel = new SendTransactionViewModel();
            TransactionsViewModel =new TransactionsViewModel();
            StandardTokenViewModel = new StandardTokenViewModel();
-           AccountViewModel.Url = "http://localhost:8545";
+           AccountViewModel.Url = "http://192.168.2.152:8545";
+            StandardTokenViewModel.StandardTokenContractAddressViewModel.ContractAddress = "0x243e72b69141f6af525a9a5fd939668ee9f2b354";
+            SendTransactionViewModel.AddressTo = "0x243e72b69141f6af525a9a5fd939668ee9f2b354";
         }
     }
 }
