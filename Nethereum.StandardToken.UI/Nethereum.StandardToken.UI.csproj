@@ -13,10 +13,6 @@
     <PackageReference Include="Nethereum.HdWallet" Version="2.4.0" />
     <PackageReference Include="Nethereum.Web3" Version="2.4.0" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
-    <PackageReference Include="ReactiveUI" Version="7.4.0" />
-    <PackageReference Include="reactiveui-core" Version="7.4.0" />
-  </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <PackageReference Include="ReactiveUI" Version="8.0.0-alpha0117" />
   </ItemGroup>
