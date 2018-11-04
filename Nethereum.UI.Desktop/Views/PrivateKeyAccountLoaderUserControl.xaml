@@ -1,6 +1,7 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:Nethereum.UI.ViewModels;assembly=Nethereum.UI"
+             xmlns:controls="clr-namespace:Nethereum.UI.Desktop.Controls;assembly=Nethereum.UI.Desktop"
              xmlns:vmDesign="clr-namespace:Nethereum.UI.Desktop.Views;assembly=Nethereum.UI.Desktop"
              >
   <Design.DataContext>
@@ -9,7 +10,7 @@
   
   <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto, Auto" Margin="16">
     <TextBlock Text="Private Key:" Classes="formLabel" Grid.Column="0" Grid.Row="0"/>
-    <TextBox Text="{Binding PrivateKey}" Classes="formTextBox" Grid.Column="1" Grid.Row="0"/>
+    <controls:ExtendedTextBox Text="{Binding PrivateKey}" Classes="formTextBox" Grid.Column="1" Grid.Row="0"/>
     <Button Content="Load Account From Private Key" Classes="formMainAction" Command="{Binding LoadAccountFromPrivateKeyCommand}"
             Grid.Column="1" Grid.Row="1" />
   </Grid>

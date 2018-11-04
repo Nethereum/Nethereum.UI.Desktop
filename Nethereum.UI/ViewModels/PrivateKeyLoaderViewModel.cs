@@ -8,7 +8,7 @@ namespace Nethereum.UI.ViewModels
 {
     public class PrivateKeyLoaderViewModel : ReactiveObject
     {
-        private string _privateKey;
+        private string _privateKey = "private";
         public string PrivateKey
         {
             get => _privateKey;
