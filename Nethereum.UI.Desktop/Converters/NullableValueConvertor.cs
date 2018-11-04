@@ -1,4 +1,5 @@
 ﻿using System;
+using Avalonia.Data.Converters;
 using Avalonia.Markup;
 
 namespace Nethereum.UI.Desktop.Converters

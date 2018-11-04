@@ -5,6 +5,7 @@ using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Nethereum.UI.UIMessages;
 using ReactiveUI;
+using ReactiveUI.Legacy;
 
 namespace Nethereum.UI.ViewModels
 {

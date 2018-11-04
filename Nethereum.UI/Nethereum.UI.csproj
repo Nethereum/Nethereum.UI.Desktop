@@ -6,10 +6,10 @@
 
   <ItemGroup>
     <PackageReference Include="Genesis.Ensure" Version="2.0.0" />
-    <PackageReference Include="Nethereum.HdWallet" Version="2.4.0" />
-    <PackageReference Include="Nethereum.Web3" Version="2.4.0" />
+    <PackageReference Include="Nethereum.HdWallet" Version="3.0.0-rc3" />
+    <PackageReference Include="Nethereum.Web3" Version="3.0.0-rc3" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <PackageReference Include="ReactiveUI" Version="8.0.0-alpha0117" />
+    <PackageReference Include="ReactiveUI" Version="9.1.1" />
   </ItemGroup> 
 </Project>

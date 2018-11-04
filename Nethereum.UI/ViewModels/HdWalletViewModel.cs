@@ -1,6 +1,7 @@
 using System.Reactive;
 using Genesis.Ensure;
 using ReactiveUI;
+using ReactiveUI.Legacy;
 
 namespace Nethereum.UI.ViewModels
 {
