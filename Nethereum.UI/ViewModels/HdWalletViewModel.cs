@@ -1,7 +1,7 @@
-using System.Reactive;
 using Genesis.Ensure;
 using ReactiveUI;
 using ReactiveUI.Legacy;
+using System.Reactive;
 
 namespace Nethereum.UI.ViewModels
 {
@@ -15,8 +15,8 @@ namespace Nethereum.UI.ViewModels
 
         public string Words
         {
-            get { return _words; }
-            set { this.RaiseAndSetIfChanged(ref _words, value); }
+            get => _words;
+            set => this.RaiseAndSetIfChanged(ref _words, value);
         }
 
         public string SeedPassword
@@ -32,16 +32,16 @@ namespace Nethereum.UI.ViewModels
         }
 
         private readonly ReactiveCommand<Unit, Unit> _loadAccountsCommand;
-        public ReactiveCommand<Unit, Unit> LoadAccountsCommand => this._loadAccountsCommand;
+        public ReactiveCommand<Unit, Unit> LoadAccountsCommand => _loadAccountsCommand;
 
         public HdWalletAccountLoaderViewModel()
         {
 
-            var canExecuteLoadAccounts= this.WhenAnyValue(
+            System.IObservable<bool> canExecuteLoadAccounts = this.WhenAnyValue(
                 x => x.Words, x => x.Path,
                 (words, path) => !string.IsNullOrEmpty(words) && !string.IsNullOrEmpty(path));
 
-            this._loadAccountsCommand = ReactiveCommand.Create(this.LoadAccounts, canExecuteLoadAccounts);
+            _loadAccountsCommand = ReactiveCommand.Create(LoadAccounts, canExecuteLoadAccounts);
 
             Path = HdWallet.Wallet.DEFAULT_PATH;
         }
@@ -53,14 +53,14 @@ namespace Nethereum.UI.ViewModels
             Ensure.ArgumentNotNullOrEmpty(Path, "No path set");
 
             Accounts.Clear();
-            var wallet = string.IsNullOrEmpty(SeedPassword) ? 
-                new HdWallet.Wallet(Words, SeedPassword, Path) : 
+            HdWallet.Wallet wallet = string.IsNullOrEmpty(SeedPassword) ?
+                new HdWallet.Wallet(Words, SeedPassword, Path) :
                 new HdWallet.Wallet(Words, Path);
 
             for (int i = 0; i < 20; i++)
             {
-                var account = wallet.GetAccount(i);
-                var hdWalletAccount = new HdWalletAccountViewModel
+                Web3.Accounts.Account account = wallet.GetAccount(i);
+                HdWalletAccountViewModel hdWalletAccount = new HdWalletAccountViewModel
                 {
                     Index = i,
                     Address = account.Address,
@@ -68,7 +68,7 @@ namespace Nethereum.UI.ViewModels
                 };
                 Accounts.Add(hdWalletAccount);
             }
-        } 
+        }
     }
 
 

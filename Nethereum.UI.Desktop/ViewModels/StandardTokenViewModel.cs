@@ -8,31 +8,22 @@ namespace Nethereum.UI.Desktop.ViewModels
         private StandardTokenTransferViewModel _standardTokenTransferViewModel;
         public StandardTokenTransferViewModel StandardTokenTransferViewModel
         {
-            get { return _standardTokenTransferViewModel; }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _standardTokenTransferViewModel, value);
-            }
+            get => _standardTokenTransferViewModel;
+            set => this.RaiseAndSetIfChanged(ref _standardTokenTransferViewModel, value);
         }
 
         private StandardTokenContractAddressViewModel _standardTokenContractAddressViewModel;
         public StandardTokenContractAddressViewModel StandardTokenContractAddressViewModel
         {
-            get { return _standardTokenContractAddressViewModel; }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _standardTokenContractAddressViewModel, value);
-            }
+            get => _standardTokenContractAddressViewModel;
+            set => this.RaiseAndSetIfChanged(ref _standardTokenContractAddressViewModel, value);
         }
 
         private StandardTokenBalanceOfViewModel _standardTokenBalanceOfViewModel;
         public StandardTokenBalanceOfViewModel StandardTokenBalanceOfViewModel
         {
-            get { return _standardTokenBalanceOfViewModel; }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _standardTokenBalanceOfViewModel, value);
-            }
+            get => _standardTokenBalanceOfViewModel;
+            set => this.RaiseAndSetIfChanged(ref _standardTokenBalanceOfViewModel, value);
         }
 
         public StandardTokenViewModel()

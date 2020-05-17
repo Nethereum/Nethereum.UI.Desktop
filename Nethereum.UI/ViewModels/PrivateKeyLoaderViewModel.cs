@@ -1,8 +1,8 @@
-using System.Reactive;
 using Genesis.Ensure;
 using Nethereum.UI.UIMessages;
 using Nethereum.Web3.Accounts;
 using ReactiveUI;
+using System.Reactive;
 
 namespace Nethereum.UI.ViewModels
 {
@@ -16,21 +16,21 @@ namespace Nethereum.UI.ViewModels
         }
 
         private readonly ReactiveCommand<Unit, string> _loadAccountFromPrivateKeyCommand;
-        public ReactiveCommand<Unit, string> LoadAccountFromPrivateKeyCommand => this._loadAccountFromPrivateKeyCommand;
+        public ReactiveCommand<Unit, string> LoadAccountFromPrivateKeyCommand => _loadAccountFromPrivateKeyCommand;
 
         public PrivateKeyLoaderViewModel()
         {
-            var canExecuteLoadPrivateKey = this.WhenAnyValue(
+            System.IObservable<bool> canExecuteLoadPrivateKey = this.WhenAnyValue(
                 x => x.PrivateKey,
                 (privateKey) => !string.IsNullOrEmpty(privateKey));
 
-            this._loadAccountFromPrivateKeyCommand = ReactiveCommand.Create(this.LoadAccountFromPrivateKey, canExecuteLoadPrivateKey);
+            _loadAccountFromPrivateKeyCommand = ReactiveCommand.Create(LoadAccountFromPrivateKey, canExecuteLoadPrivateKey);
         }
 
         public string LoadAccountFromPrivateKey()
         {
-            Ensure.ArgumentNotNull(this.PrivateKey, "Private Key");
-            var account = new Account(_privateKey);
+            Ensure.ArgumentNotNull(PrivateKey, "Private Key");
+            Account account = new Account(_privateKey);
 
             MessageBus.Current.SendMessage(new AccountLoaded(account));
 

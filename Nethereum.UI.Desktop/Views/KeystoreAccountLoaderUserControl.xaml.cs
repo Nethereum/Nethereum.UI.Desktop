@@ -8,24 +8,24 @@ namespace Nethereum.UI.Desktop.Views
     {
         public KeystoreAccountLoaderUserControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
 
-            this.FindControl<Button>("btnOpenFile").Click += async delegate 
+            this.FindControl<Button>("btnOpenFile").Click += async delegate
             {
-                var openfileDialog = new OpenFileDialog()
+                OpenFileDialog openfileDialog = new OpenFileDialog()
                 {
                     Title = "Open file"
                 };
 
-                var files = await openfileDialog.ShowAsync(GetWindow());
+                string[] files = await openfileDialog.ShowAsync(GetWindow());
                 if (files != null && files.Length > 0)
                 {
-                    var vm = (KeyStoreLoaderViewModel) DataContext;
+                    KeyStoreLoaderViewModel vm = (KeyStoreLoaderViewModel)DataContext;
                     if (vm != null)
                     {
                         vm.FileName = files[0];
@@ -34,7 +34,9 @@ namespace Nethereum.UI.Desktop.Views
             };
         }
 
-        Window GetWindow() => (Window)this.VisualRoot;
-
+        private Window GetWindow()
+        {
+            return (Window)VisualRoot;
+        }
     }
 }

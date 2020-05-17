@@ -1,14 +1,14 @@
-using System;
-using System.Numerics;
-using System.Reactive;
-using System.Reactive.Linq;
-using System.Threading.Tasks;
 using Genesis.Ensure;
 using Nethereum.StandardToken.UI.SmartContractMessages;
 using Nethereum.StandardToken.UI.UIMessages;
 using Nethereum.UI.UIMessages;
 using Nethereum.UI.Util;
 using ReactiveUI;
+using System;
+using System.Numerics;
+using System.Reactive;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
 
 namespace Nethereum.StandardToken.UI.ViewModels
 {
@@ -43,7 +43,7 @@ namespace Nethereum.StandardToken.UI.ViewModels
         }
 
         private readonly ReactiveCommand<Unit, bool> _refreshBalanceCommand;
-        public ReactiveCommand<Unit, bool> RefreshBalanceCommand => this._refreshBalanceCommand;
+        public ReactiveCommand<Unit, bool> RefreshBalanceCommand => _refreshBalanceCommand;
 
         public StandardTokenBalanceOfViewModel()
         {
@@ -65,7 +65,7 @@ namespace Nethereum.StandardToken.UI.ViewModels
                 }
             );
 
-            var isValidRefreshBalance = this.WhenAnyValue(x => x.Address, x => x.Url, x => x.ContractAddress,
+            IObservable<bool> isValidRefreshBalance = this.WhenAnyValue(x => x.Address, x => x.Url, x => x.ContractAddress,
                 (address, url, contractAddress) => Utils.IsValidAddress(address) && Utils.IsValidAddress(contractAddress) && Utils.IsValidUrl(url));
 
             isValidRefreshBalance.Where(x => x == true)
@@ -82,17 +82,17 @@ namespace Nethereum.StandardToken.UI.ViewModels
 
         public async Task<decimal> GetBalanceAsync()
         {
-            Ensure.ArgumentNotNull(this.Address, "Address");
-            Ensure.ArgumentNotNull(this.Url, "Url");
-            Ensure.ArgumentNotNull(this.ContractAddress, "ContractAddress");
+            Ensure.ArgumentNotNull(Address, "Address");
+            Ensure.ArgumentNotNull(Url, "Url");
+            Ensure.ArgumentNotNull(ContractAddress, "ContractAddress");
 
-            var web3 = new Web3.Web3(Url);
-            var handler = web3.Eth.GetContractHandler(ContractAddress);
-            var balanceMessage = new BalanceOfFunction(){Owner = Address};
-            var balance = await handler.QueryAsync<BalanceOfFunction,BigInteger>(balanceMessage);
-            
+            Web3.Web3 web3 = new Web3.Web3(Url);
+            Contracts.ContractHandlers.ContractHandler handler = web3.Eth.GetContractHandler(ContractAddress);
+            BalanceOfFunction balanceMessage = new BalanceOfFunction() { Owner = Address };
+            BigInteger balance = await handler.QueryAsync<BalanceOfFunction, BigInteger>(balanceMessage);
+
             //assuming all have 18 decimals
-            var value = Web3.Web3.Convert.FromWeiToBigDecimal(balance);
+            Util.BigDecimal value = Web3.Web3.Convert.FromWeiToBigDecimal(balance);
             return decimal.Parse(value.ToString());
         }
     }

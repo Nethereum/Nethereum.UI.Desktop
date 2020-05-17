@@ -11,12 +11,12 @@ namespace Nethereum.UI.Desktop.Views
                 Amount = 10,
                 BlockHash = "0x13f022d72158410433cbd66f5dd8bf6d2d129924",
                 TransactionHash = "0x13f022d72158410433cbd66f5dd8bf6d2d129924",
-                To= "0x13f022d72158410433cbd66f5dd8bf6d2d129924",
+                To = "0x13f022d72158410433cbd66f5dd8bf6d2d129924",
                 From = "0x13f022d72158410433cbd66f5dd8bf6d2d129924",
                 Gas = 12345,
                 Nonce = 2,
                 Status = TransactionViewModel.STATUS_INPROGRESS
-               
+
             });
 
             Transactions.Add(new TransactionViewModel()

@@ -1,11 +1,11 @@
-using System;
-using System.Reactive;
-using System.Reactive.Linq;
-using System.Threading.Tasks;
 using Genesis.Ensure;
 using Nethereum.UI.UIMessages;
 using Nethereum.Web3.Accounts;
 using ReactiveUI;
+using System;
+using System.Reactive;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
 
 namespace Nethereum.UI.ViewModels
 {
@@ -15,11 +15,8 @@ namespace Nethereum.UI.ViewModels
         private string _privateKey;
         public string PrivateKey
         {
-            get { return _privateKey; }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _privateKey, value);
-            }
+            get => _privateKey;
+            set => this.RaiseAndSetIfChanged(ref _privateKey, value);
         }
 
         private string _address;
@@ -50,15 +47,15 @@ namespace Nethereum.UI.ViewModels
         }
 
         private readonly ReactiveCommand<Unit, bool> _refreshBalanceCommand;
-        public ReactiveCommand<Unit, bool> RefreshBalanceCommand => this._refreshBalanceCommand;
+        public ReactiveCommand<Unit, bool> RefreshBalanceCommand => _refreshBalanceCommand;
 
         public AccountViewModel()
         {
-           
+
             this.WhenAnyValue(x => x.Url, (url) => Util.Utils.IsValidUrl(url)).Subscribe(_ =>
                 MessageBus.Current.SendMessage(
                     new UrlChanged(_url)));
-            
+
             MessageBus.Current.Listen<AccountLoaded>().Subscribe(x =>
                 {
                     account = x.Account;
@@ -67,26 +64,26 @@ namespace Nethereum.UI.ViewModels
                 }
             );
 
-            var isValidRefreshBalance = this.WhenAnyValue(x => x.Address, x => x.Url,
+            IObservable<bool> isValidRefreshBalance = this.WhenAnyValue(x => x.Address, x => x.Url,
                 (address, url) => Util.Utils.IsValidAddress(address) && Util.Utils.IsValidUrl(url));
 
             isValidRefreshBalance.Where(x => x == true)
                 .Subscribe(async _ => await RefreshBalanceAsync());
 
-           _refreshBalanceCommand =  ReactiveCommand.CreateFromTask(RefreshBalanceAsync, isValidRefreshBalance);
+            _refreshBalanceCommand = ReactiveCommand.CreateFromTask(RefreshBalanceAsync, isValidRefreshBalance);
 
-       
+
         }
 
-        
+
         public async Task<decimal> GetBalanceAsync()
         {
-            Ensure.ArgumentNotNull(this.Address, "Address");
-            Ensure.ArgumentNotNull(this.Url, "Url");
+            Ensure.ArgumentNotNull(Address, "Address");
+            Ensure.ArgumentNotNull(Url, "Url");
 
-            var web3 = new Web3.Web3(Url);
-            var balance = await web3.Eth.GetBalance.SendRequestAsync(Address);
-            var value = Web3.Web3.Convert.FromWeiToBigDecimal(balance.Value);
+            Web3.Web3 web3 = new Web3.Web3(Url);
+            Hex.HexTypes.HexBigInteger balance = await web3.Eth.GetBalance.SendRequestAsync(Address);
+            Nethereum.Util.BigDecimal value = Web3.Web3.Convert.FromWeiToBigDecimal(balance.Value);
             return decimal.Parse(value.ToString());
         }
     }

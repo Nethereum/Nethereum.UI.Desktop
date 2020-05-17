@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using ReactiveUI;
+using System.Collections.Generic;
 using System.Linq;
-using ReactiveUI;
 
 namespace Nethereum.UI.Validations
 {
@@ -27,7 +27,7 @@ namespace Nethereum.UI.Validations
                 return false;
             }
 
-            var str = value as string;
+            string str = value as string;
 
             return !string.IsNullOrWhiteSpace(str);
         }
@@ -52,7 +52,7 @@ namespace Nethereum.UI.Validations
         {
             get => _value;
             set => this.RaiseAndSetIfChanged(ref _value, value);
-           
+
         }
 
         public bool IsValid
@@ -78,7 +78,7 @@ namespace Nethereum.UI.Validations
             Errors = errors.ToList();
             IsValid = !Errors.Any();
 
-            return this.IsValid;
+            return IsValid;
         }
     }
 }

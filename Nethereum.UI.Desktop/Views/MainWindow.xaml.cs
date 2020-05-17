@@ -17,9 +17,9 @@ namespace Nethereum.UI.Desktop.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-           
+
         }
 
-        
+
     }
 }

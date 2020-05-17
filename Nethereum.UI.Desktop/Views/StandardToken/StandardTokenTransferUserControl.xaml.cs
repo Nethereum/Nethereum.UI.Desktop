@@ -1,8 +1,8 @@
-﻿using System;
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Nethereum.StandardToken.UI.ViewModels;
 using ReactiveUI;
+using System;
 
 namespace Nethereum.UI.Desktop.Views.StandardToken
 {
@@ -10,23 +10,23 @@ namespace Nethereum.UI.Desktop.Views.StandardToken
     {
         public StandardTokenTransferUserControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         protected override void OnDataContextChanged(EventArgs e)
         {
-            this.ViewModel = (StandardTokenTransferViewModel)DataContext;
+            ViewModel = (StandardTokenTransferViewModel)DataContext;
 
             if (ViewModel != null)
             {
-                this.ViewModel
+                ViewModel
                     .ConfirmTransfer
                     .RegisterHandler(
                         interaction =>
                         {
-                            var dialogResult = true;
-                            //TODO Confirm Dialog
-                            https://github.com/AvaloniaUI/Avalonia/issues/670
+                            bool dialogResult = true;
+                        //TODO Confirm Dialog
+                        https://github.com/AvaloniaUI/Avalonia/issues/670
 
                             if (dialogResult == true)
                             {
@@ -45,12 +45,15 @@ namespace Nethereum.UI.Desktop.Views.StandardToken
             AvaloniaXamlLoader.Load(this);
         }
 
-        Window GetWindow() => (Window)this.VisualRoot;
+        private Window GetWindow()
+        {
+            return (Window)VisualRoot;
+        }
 
         object IViewFor.ViewModel
         {
-            get { return ViewModel; }
-            set { ViewModel = (StandardTokenTransferViewModel) value; }
+            get => ViewModel;
+            set => ViewModel = (StandardTokenTransferViewModel)value;
         }
 
         public StandardTokenTransferViewModel ViewModel { get; set; }

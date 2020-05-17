@@ -1,6 +1,3 @@
-using System;
-using System.Reactive.Linq;
-using System.Threading.Tasks;
 using Genesis.Ensure;
 using Nethereum.Hex.HexTypes;
 using Nethereum.StandardToken.UI.SmartContractMessages;
@@ -9,6 +6,9 @@ using Nethereum.UI.UIMessages;
 using Nethereum.UI.Util;
 using Nethereum.UI.ViewModels;
 using ReactiveUI;
+using System;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
 
 namespace Nethereum.StandardToken.UI.ViewModels
 {
@@ -38,7 +38,7 @@ namespace Nethereum.StandardToken.UI.ViewModels
                 }
             );
 
-            var canExecuteTransaction = this.WhenAnyValue(
+            IObservable<bool> canExecuteTransaction = this.WhenAnyValue(
                 x => x.AddressTo,
                 x => x.Amount,
                 x => x.Url,
@@ -49,36 +49,43 @@ namespace Nethereum.StandardToken.UI.ViewModels
                     Utils.IsValidUrl(url) &&
                     account != null);
 
-            this._executeTrasnactionCommand = ReactiveCommand.CreateFromTask(ExecuteAsync, canExecuteTransaction);
+            _executeTrasnactionCommand = ReactiveCommand.CreateFromTask(ExecuteAsync, canExecuteTransaction);
         }
 
 
         public async Task<string> ExecuteAsync()
         {
-            Ensure.ArgumentNotNullOrEmpty(this.AddressTo, "Address To");
-            Ensure.ArgumentNotNullOrEmpty(this.Url, "Url");
-            Ensure.ArgumentNotNull(this.Account, "Account");
-            Ensure.ArgumentNotNull(this.Amount, "Token Amount");
+            Ensure.ArgumentNotNullOrEmpty(AddressTo, "Address To");
+            Ensure.ArgumentNotNullOrEmpty(Url, "Url");
+            Ensure.ArgumentNotNull(Account, "Account");
+            Ensure.ArgumentNotNull(Amount, "Token Amount");
 
-            var confirmed = await _confirmTransfer.Handle(GetConfirmationMessage());
+            bool confirmed = await _confirmTransfer.Handle(GetConfirmationMessage());
 
             if (confirmed)
             {
-                var web3 = new Web3.Web3(Account, Url);
+                Web3.Web3 web3 = new Web3.Web3(Account, Url);
 
-                var transferfuction =
+                TransferFunction transferfuction =
                     new TransferFunction
                     {
                         TokenAmount = Web3.Web3.Convert.ToWei(Amount.Value),
                         To = AddressTo,
                         FromAddress = web3.TransactionManager.Account.Address
                     };
-                 
-                if (Gas != null) transferfuction.Gas = new HexBigInteger(Gas.Value);
-                if (GasPrice != null) transferfuction.GasPrice = new HexBigInteger(GasPrice.Value);
 
-                var handler = web3.Eth.GetContractHandler(ContractAddress);
-                var transactionHash = await handler.SendRequestAsync(transferfuction);
+                if (Gas != null)
+                {
+                    transferfuction.Gas = new HexBigInteger(Gas.Value);
+                }
+
+                if (GasPrice != null)
+                {
+                    transferfuction.GasPrice = new HexBigInteger(GasPrice.Value);
+                }
+
+                Contracts.ContractHandlers.ContractHandler handler = web3.Eth.GetContractHandler(ContractAddress);
+                string transactionHash = await handler.SendRequestAsync(transferfuction);
                 MessageBus.Current.SendMessage<TransactionAdded>(new TransactionAdded(transactionHash));
                 return transactionHash;
             }

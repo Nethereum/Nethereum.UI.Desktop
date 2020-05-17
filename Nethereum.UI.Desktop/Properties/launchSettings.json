@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Nethereum.UI.Desktop": {
+      "commandName": "Project",
+      "workingDirectory": "E:\\Nethereum.UI.Desktop",
+      "remoteDebugEnabled": false,
+      "sqlDebugging": true,
+      "nativeDebugging": true
+    }
+  }
+}

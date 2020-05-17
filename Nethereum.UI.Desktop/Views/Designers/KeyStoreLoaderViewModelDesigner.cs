@@ -6,9 +6,9 @@ namespace Nethereum.UI.Desktop.Views
     {
         public KeyStoreLoaderViewModelDesigner()
         {
-            this.FileName = "C:/test/test";
-            this.Password = "Password";
-            
+            FileName = "C:/test/test";
+            Password = "Password";
+
         }
     }
 }
