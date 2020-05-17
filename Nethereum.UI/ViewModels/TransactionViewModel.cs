@@ -12,16 +12,19 @@ namespace Nethereum.UI.ViewModels
 
         public void Initialise(Transaction transaction)
         {
-            this.TransactionHash = transaction.TransactionHash;
-            this.BlockHash = transaction.BlockHash;
-            this.Nonce = (ulong)transaction.Nonce.Value;
-            this.From = transaction.From;
-            this.To = transaction.To;
-            this.Gas = (ulong)transaction.Gas.Value;
-            this.GasPrice = (ulong)transaction.GasPrice.Value;
-            this.Data = transaction.Input;
-            
-            if (transaction.Value != null) this.Amount = Web3.Web3.Convert.FromWei(transaction.Value.Value);
+            TransactionHash = transaction.TransactionHash;
+            BlockHash = transaction.BlockHash;
+            Nonce = (ulong)transaction.Nonce.Value;
+            From = transaction.From;
+            To = transaction.To;
+            Gas = (ulong)transaction.Gas.Value;
+            GasPrice = (ulong)transaction.GasPrice.Value;
+            Data = transaction.Input;
+
+            if (transaction.Value != null)
+            {
+                Amount = Web3.Web3.Convert.FromWei(transaction.Value.Value);
+            }
         }
 
         private string _blockHash;

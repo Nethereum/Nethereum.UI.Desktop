@@ -7,7 +7,7 @@ namespace Nethereum.UI.Desktop.Views
     {
         public AccountUserControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()

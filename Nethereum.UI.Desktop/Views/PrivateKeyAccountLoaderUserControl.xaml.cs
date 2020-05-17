@@ -7,7 +7,7 @@ namespace Nethereum.UI.Desktop.Views
     {
         public PrivateKeyAccountLoaderUserControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()

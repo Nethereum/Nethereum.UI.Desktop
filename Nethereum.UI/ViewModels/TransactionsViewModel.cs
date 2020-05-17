@@ -1,11 +1,11 @@
+using Nethereum.UI.UIMessages;
+using ReactiveUI;
+using ReactiveUI.Legacy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
-using Nethereum.UI.UIMessages;
-using ReactiveUI;
-using ReactiveUI.Legacy;
 
 namespace Nethereum.UI.ViewModels
 {
@@ -13,7 +13,7 @@ namespace Nethereum.UI.ViewModels
     {
         public ReactiveList<TransactionViewModel> Transactions { get; set; } = new ReactiveList<TransactionViewModel>();
         private readonly TimeSpan updateInterval = TimeSpan.FromMilliseconds(2000);
-        private IDisposable timer;
+        private readonly IDisposable timer;
         private readonly object receiptsCheckLock = new object();
 
         private string _url;
@@ -50,9 +50,9 @@ namespace Nethereum.UI.ViewModels
             {
                 if (Util.Utils.IsValidUrl(Url))
                 {
-                    var web3 = new Web3.Web3(Url);
-                    var transactionViewModel = new TransactionViewModel();
-                    var transaction =
+                    Web3.Web3 web3 = new Web3.Web3(Url);
+                    TransactionViewModel transactionViewModel = new TransactionViewModel();
+                    RPC.Eth.DTOs.Transaction transaction =
                         await web3.Eth.Transactions.GetTransactionByHash.SendRequestAsync(x.TransactionHash);
                     transactionViewModel.Initialise(transaction);
                     transactionViewModel.Status = TransactionViewModel.STATUS_INPROGRESS;
@@ -80,10 +80,10 @@ namespace Nethereum.UI.ViewModels
 
             if (Util.Utils.IsValidUrl(Url))
             {
-                var web3 = new Web3.Web3(Url);
-                foreach (var transaction in transactionsInProgress)
+                Web3.Web3 web3 = new Web3.Web3(Url);
+                foreach (TransactionViewModel transaction in transactionsInProgress)
                 {
-                    var receipt = await web3.Eth.Transactions.GetTransactionReceipt
+                    RPC.Eth.DTOs.TransactionReceipt receipt = await web3.Eth.Transactions.GetTransactionReceipt
                         .SendRequestAsync(transaction.TransactionHash);
 
                     if (receipt != null)

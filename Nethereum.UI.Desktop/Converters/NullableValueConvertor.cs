@@ -1,6 +1,5 @@
-﻿using System;
-using Avalonia.Data.Converters;
-using Avalonia.Markup;
+﻿using Avalonia.Data.Converters;
+using System;
 
 namespace Nethereum.UI.Desktop.Converters
 {
@@ -8,7 +7,7 @@ namespace Nethereum.UI.Desktop.Converters
     {
         private static readonly NullableIntConverter defaultInstance = new NullableIntConverter();
 
-        public static NullableIntConverter Default { get { return defaultInstance; } }
+        public static NullableIntConverter Default => defaultInstance;
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -28,8 +27,7 @@ namespace Nethereum.UI.Desktop.Converters
         {
             if (value is string)
             {
-                int number;
-                if (Int32.TryParse((string)value, out number))
+                if (int.TryParse((string)value, out int number))
                 {
                     return number;
                 }
@@ -43,7 +41,7 @@ namespace Nethereum.UI.Desktop.Converters
     {
         private static readonly NullableUInt64Converter defaultInstance = new NullableUInt64Converter();
 
-        public static NullableUInt64Converter Default { get { return defaultInstance; } }
+        public static NullableUInt64Converter Default => defaultInstance;
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -63,8 +61,7 @@ namespace Nethereum.UI.Desktop.Converters
         {
             if (value is string)
             {
-                ulong number;
-                if (UInt64.TryParse((string)value, out number))
+                if (ulong.TryParse((string)value, out ulong number))
                 {
                     return number;
                 }
@@ -79,7 +76,7 @@ namespace Nethereum.UI.Desktop.Converters
     {
         private static readonly NullableDecimalConverter defaultInstance = new NullableDecimalConverter();
 
-        public static NullableDecimalConverter Default { get { return defaultInstance; } }
+        public static NullableDecimalConverter Default => defaultInstance;
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -99,8 +96,7 @@ namespace Nethereum.UI.Desktop.Converters
         {
             if (value is string)
             {
-                decimal number;
-                if (Decimal.TryParse((string)value, out number))
+                if (decimal.TryParse((string)value, out decimal number))
                 {
                     return number;
                 }

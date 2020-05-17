@@ -1,8 +1,8 @@
-using System;
-using System.Reactive.Linq;
 using Nethereum.StandardToken.UI.UIMessages;
 using Nethereum.UI.Util;
 using ReactiveUI;
+using System;
+using System.Reactive.Linq;
 
 namespace Nethereum.StandardToken.UI.ViewModels
 {
@@ -18,7 +18,7 @@ namespace Nethereum.StandardToken.UI.ViewModels
 
         public StandardTokenContractAddressViewModel()
         {
-            var isValidContractAddresss = this.WhenAnyValue(x => x.ContractAddress,
+            IObservable<bool> isValidContractAddresss = this.WhenAnyValue(x => x.ContractAddress,
                 (contractAddress) => Utils.IsValidAddress(contractAddress));
 
             isValidContractAddresss.Where(x => x == true)

@@ -1,7 +1,7 @@
-using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Nethereum.UI.Desktop.ViewModels;
+using System;
 
 namespace Nethereum.UI.Desktop
 {
@@ -11,8 +11,8 @@ namespace Nethereum.UI.Desktop
 
         public IControl Build(object data)
         {
-            var name = data.GetType().FullName.Replace("ViewModel", "View");
-            var type = Type.GetType(name);
+            string name = data.GetType().FullName.Replace("ViewModel", "View");
+            Type type = Type.GetType(name);
 
             if (type != null)
             {

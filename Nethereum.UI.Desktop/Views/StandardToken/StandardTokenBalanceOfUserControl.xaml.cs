@@ -7,7 +7,7 @@ namespace Nethereum.UI.Desktop.Views.StandardToken
     {
         public StandardTokenBalanceOfUserControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()

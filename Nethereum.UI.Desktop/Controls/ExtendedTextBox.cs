@@ -3,11 +3,11 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
 using Avalonia.Input.Platform;
+using Avalonia.Media;
 using Avalonia.Styling;
 using ReactiveUI;
 using System;
 using System.Reactive.Linq;
-using Avalonia.Media;
 
 namespace Nethereum.UI.Desktop.Controls
 {
@@ -36,7 +36,7 @@ namespace Nethereum.UI.Desktop.Controls
             {
                 if (!(_pasteItem is null))
                 {
-                    var items = ContextMenu.Items as Avalonia.Controls.Controls;
+                    Avalonia.Controls.Controls items = ContextMenu.Items as Avalonia.Controls.Controls;
 
                     if (ro)
                     {
@@ -63,7 +63,7 @@ namespace Nethereum.UI.Desktop.Controls
 
         private async void PasteAsync()
         {
-            var text = await ((IClipboard)AvaloniaLocator.Current.GetService(typeof(IClipboard))).GetTextAsync();
+            string text = await ((IClipboard)AvaloniaLocator.Current.GetService(typeof(IClipboard))).GetTextAsync();
 
             if (text is null)
             {
@@ -75,16 +75,18 @@ namespace Nethereum.UI.Desktop.Controls
 
         private string GetSelection()
         {
-            var text = Text;
+            string text = Text;
 
             if (string.IsNullOrEmpty(text))
+            {
                 return "";
+            }
 
-            var selectionStart = SelectionStart;
-            var selectionEnd = SelectionEnd;
+            int selectionStart = SelectionStart;
+            int selectionEnd = SelectionEnd;
 
-            var start = Math.Min(selectionStart, selectionEnd);
-            var end = Math.Max(selectionStart, selectionEnd);
+            int start = Math.Min(selectionStart, selectionEnd);
+            int end = Math.Max(selectionStart, selectionEnd);
 
             if (start == end || (Text?.Length ?? 0) < end)
             {
@@ -96,7 +98,7 @@ namespace Nethereum.UI.Desktop.Controls
 
         private async void CopyAsync()
         {
-            var selection = GetSelection();
+            string selection = GetSelection();
 
             if (string.IsNullOrWhiteSpace(selection))
             {
@@ -118,7 +120,7 @@ namespace Nethereum.UI.Desktop.Controls
             {
                 DataContext = this,
             };
-            var pastePresenter = new DrawingPresenter
+            DrawingPresenter pastePresenter = new DrawingPresenter
             {
                 Drawing = new GeometryDrawing
                 {
@@ -130,7 +132,7 @@ namespace Nethereum.UI.Desktop.Controls
                 Width = 16,
                 Height = 16,
             };
-            var copyPresenter = new DrawingPresenter
+            DrawingPresenter copyPresenter = new DrawingPresenter
             {
                 Drawing = new GeometryDrawing
                 {

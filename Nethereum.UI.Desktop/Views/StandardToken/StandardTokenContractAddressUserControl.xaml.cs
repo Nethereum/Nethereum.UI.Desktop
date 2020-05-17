@@ -7,7 +7,7 @@ namespace Nethereum.UI.Desktop.Views.StandardToken
     {
         public StandardTokenContractAddressUserControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void InitializeComponent()

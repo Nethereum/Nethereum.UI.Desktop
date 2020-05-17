@@ -7,7 +7,7 @@ namespace Nethereum.UI.Desktop.Views
     {
         public TransactionsUserControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
 
@@ -16,7 +16,7 @@ namespace Nethereum.UI.Desktop.Views
             AvaloniaXamlLoader.Load(this);
         }
 
-       
+
 
     }
 }

@@ -1,8 +1,8 @@
-using System;
-using System.Reactive;
 using Nethereum.UI.UIMessages;
 using Nethereum.Web3.Accounts;
 using ReactiveUI;
+using System;
+using System.Reactive;
 
 namespace Nethereum.UI.ViewModels
 {
@@ -65,14 +65,14 @@ namespace Nethereum.UI.ViewModels
         }
 
         protected readonly Interaction<string, bool> _confirmTransfer;
-        public Interaction<string, bool> ConfirmTransfer => this._confirmTransfer;
+        public Interaction<string, bool> ConfirmTransfer => _confirmTransfer;
 
         protected ReactiveCommand<Unit, string> _executeTrasnactionCommand;
-        public ReactiveCommand<Unit, string> ExecuteTransactionCommand => this._executeTrasnactionCommand;
+        public ReactiveCommand<Unit, string> ExecuteTransactionCommand => _executeTrasnactionCommand;
 
         public SendTransactionBaseViewModel()
         {
-            this._confirmTransfer = new Interaction<string, bool>();
+            _confirmTransfer = new Interaction<string, bool>();
             GasPrice = (ulong)Signer.Transaction.DEFAULT_GAS_PRICE;
 
             MessageBus.Current.Listen<AccountLoaded>().Subscribe(x =>

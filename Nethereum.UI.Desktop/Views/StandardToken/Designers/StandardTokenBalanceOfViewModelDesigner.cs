@@ -6,9 +6,9 @@ namespace Nethereum.UI.Desktop.Views.StandardToken.Designers
     {
         public StandardTokenBalanceOfViewModelDesigner()
         {
-            this.Address = "0xkfljas324908789fiofoisudfsfslkfjls";
-            this.Balance = 100;
-            
+            Address = "0xkfljas324908789fiofoisudfsfslkfjls";
+            Balance = 100;
+
         }
     }
 }
