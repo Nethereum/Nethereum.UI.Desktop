@@ -10,7 +10,7 @@ namespace Nethereum.UI.Desktop.Views
         {
             InitializeComponent();
 #if DEBUG
-            this.AttachDevTools();
+           // this.AttachDevTools();
 #endif
         }
 

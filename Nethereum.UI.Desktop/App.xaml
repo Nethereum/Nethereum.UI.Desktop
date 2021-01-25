@@ -1,6 +1,7 @@
 ﻿<Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:desktop="clr-namespace:Nethereum.UI.Desktop">
+             xmlns:desktop="clr-namespace:Nethereum.UI.Desktop"
+			 x:Class="Nethereum.UI.Desktop.App">
     <Application.DataTemplates>
         <desktop:ViewLocator/>
     </Application.DataTemplates>
@@ -8,6 +9,7 @@
     <Application.Styles>
         <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
         <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
+		<FluentTheme Mode="Dark"/>
         <Style Selector="TextBlock.formLabel">
           <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
           <Setter Property="FontWeight" Value="Bold"/>
@@ -43,6 +45,8 @@
       <Style Selector="TabControl.mainTab TabStripItem:selected">
           <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush2}"/>
         </Style>
-      
-    </Application.Styles>
+		
+
+
+	</Application.Styles>
 </Application>

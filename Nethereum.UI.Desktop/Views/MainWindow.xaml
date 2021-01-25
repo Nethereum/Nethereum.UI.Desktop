@@ -3,7 +3,8 @@
         xmlns:vm="clr-namespace:Nethereum.UI.Desktop.ViewModels;assembly=Nethereum.UI.Desktop"
         xmlns:controls="clr-namespace:Nethereum.UI.Desktop.Views;assembly=Nethereum.UI.Desktop"
         xmlns:controlsStandardToken="clr-namespace:Nethereum.UI.Desktop.Views.StandardToken;assembly=Nethereum.UI.Desktop"
-        Icon="resm:Nethereum.UI.Desktop.Assets.avalonia-logo.ico"
+		x:Class="Nethereum.UI.Desktop.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
         Title="Nethereum Simple Wallet">
   <Design.DataContext> 
     <vm:MainWindowViewModel/>

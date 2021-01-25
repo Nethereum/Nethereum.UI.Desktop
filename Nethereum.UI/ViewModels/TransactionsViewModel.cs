@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using DynamicData;
 using Nethereum.UI.UIMessages;
 using ReactiveUI;
 using ReactiveUI.Legacy;
@@ -11,7 +12,7 @@ namespace Nethereum.UI.ViewModels
 {
     public class TransactionsViewModel : ReactiveObject
     {
-        public ReactiveList<TransactionViewModel> Transactions { get; set; } = new ReactiveList<TransactionViewModel>();
+        public SourceList<TransactionViewModel> Transactions { get; set; } = new SourceList<TransactionViewModel>();
         private readonly TimeSpan updateInterval = TimeSpan.FromMilliseconds(2000);
         private IDisposable timer;
         private readonly object receiptsCheckLock = new object();
@@ -25,7 +26,7 @@ namespace Nethereum.UI.ViewModels
 
         public TransactionsViewModel()
         {
-            Transactions.ChangeTrackingEnabled = true;
+            //Transactions.ChangeTrackingEnabled = true;
 
             MessageBus.Current.Listen<AccountLoaded>().Subscribe(x =>
                 {
@@ -75,7 +76,7 @@ namespace Nethereum.UI.ViewModels
             lock (receiptsCheckLock)
             {
                 transactionsInProgress =
-                    Transactions.Where(x => x.Status == TransactionViewModel.STATUS_INPROGRESS);
+                    Transactions.Items.Where(x => x.Status == TransactionViewModel.STATUS_INPROGRESS);
             }
 
             if (Util.Utils.IsValidUrl(Url))

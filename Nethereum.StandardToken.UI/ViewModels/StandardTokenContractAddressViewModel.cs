@@ -19,7 +19,7 @@ namespace Nethereum.StandardToken.UI.ViewModels
         public StandardTokenContractAddressViewModel()
         {
             var isValidContractAddresss = this.WhenAnyValue(x => x.ContractAddress,
-                (contractAddress) => Utils.IsValidAddress(contractAddress));
+                (contractAddress) => Nethereum.UI.Util.Utils.IsValidAddress(contractAddress));
 
             isValidContractAddresss.Where(x => x == true)
                 .Subscribe(_ => MessageBus.Current.SendMessage(new StandardTokenAddressChanged(ContractAddress)));

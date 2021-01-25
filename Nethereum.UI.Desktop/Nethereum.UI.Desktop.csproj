@@ -1,102 +1,37 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Compile Update="**\*.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="**\*.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\*" />
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\MainWindow.xaml.cs">
-      <DependentUpon>Views\MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Folder Include="Controls\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Views\AccountUserControl.xaml" />
-    <None Remove="Views\KeystoreAccountLoaderUserControl.xaml" />
-    <None Remove="Views\PrivateKeyAccountLoaderUserControl.xaml" />
-    <None Remove="Views\SendTransactionUserControl.xaml" />
-    <None Remove="Views\StandardToken\StandardTokenBalanceOfUserControl.xaml" />
-    <None Remove="Views\StandardToken\StandardTokenContractAddressUserControlx.xaml" />
-    <None Remove="Views\StandardToken\StandardTokenTransferUserControl.xaml" />
-    <None Remove="Views\StandardToken\StandardTokenUserControl.xaml" />
-    <None Remove="Views\TransactionsUserControl.xaml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Nethereum.StandardToken.UI\Nethereum.StandardToken.UI.csproj" />
     <ProjectReference Include="..\Nethereum.UI\Nethereum.UI.csproj" />
   </ItemGroup>
+   <ItemGroup>
+		<Folder Include="Models\" />
+		<AvaloniaResource Include="Assets\**" />
+</ItemGroup>
+   <ItemGroup>
+     <AvaloniaXaml Include="App.xaml" />
+     <AvaloniaXaml Include="Views\AccountUserControl.xaml" />
+     <AvaloniaXaml Include="Views\KeystoreAccountLoaderUserControl.xaml" />
+     <AvaloniaXaml Include="Views\MainWindow.xaml" />
+     <AvaloniaXaml Include="Views\PrivateKeyAccountLoaderUserControl.xaml" />
+     <AvaloniaXaml Include="Views\SendTransactionUserControl.xaml" />
+     <AvaloniaXaml Include="Views\StandardToken\StandardTokenBalanceOfUserControl.xaml" />
+     <AvaloniaXaml Include="Views\StandardToken\StandardTokenContractAddressUserControl.xaml" />
+     <AvaloniaXaml Include="Views\StandardToken\StandardTokenTransferUserControl.xaml" />
+     <AvaloniaXaml Include="Views\StandardToken\StandardTokenUserControl.xaml" />
+     <AvaloniaXaml Include="Views\TransactionsUserControl.xaml" />
+   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\StandardToken\StandardTokenUserControl.xaml.cs">
-      <DependentUpon>StandardTokenUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\StandardToken\StandardTokenContractAddressUserControl.xaml.cs">
-      <DependentUpon>StandardTokenContractAddressUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\StandardToken\StandardTokenTransferUserControl.xaml.cs">
-      <DependentUpon>StandardTokenTransferUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\StandardToken\StandardTokenBalanceOfUserControl.xaml.cs">
-      <DependentUpon>StandardTokenBalanceOfUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\TransactionsUserControl.xaml.cs">
-      <DependentUpon>TransactionsUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SendTransactionUserControl.xaml.cs">
-      <DependentUpon>SendTransactionUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\KeystoreAccountLoaderUserControl.xaml.cs">
-      <DependentUpon>KeystoreAccountLoaderUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\AccountUserControl.xaml.cs">
-      <DependentUpon>AccountUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\PrivateKeyAccountLoaderUserControl.xaml.cs">
-      <DependentUpon>PrivateKeyAccountLoaderUserControl.xaml</DependentUpon>
-    </Compile>
+    <PackageReference Include="DynamicData" Version="7.1.1" />
+    <PackageReference Include="Splat" Version="10.0.1" />
+    <PackageReference Include="Avalonia" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.0" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Views\StandardToken\StandardTokenUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\StandardToken\StandardTokenContractAddressUserControlx.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\StandardToken\StandardTokenTransferUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\StandardToken\StandardTokenBalanceOfUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\TransactionsUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\SendTransactionUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\KeystoreAccountLoaderUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\PrivateKeyAccountLoaderUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\AccountUserControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Splat" Version="5.0.2" />
-    <PackageReference Include="Avalonia" Version="0.7.0" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.7.0" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.7.0" />
+    <Resource Include="Views\MainWindow.xaml" />
   </ItemGroup>
 </Project>

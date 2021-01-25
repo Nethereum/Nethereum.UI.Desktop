@@ -66,7 +66,7 @@ namespace Nethereum.StandardToken.UI.ViewModels
             );
 
             var isValidRefreshBalance = this.WhenAnyValue(x => x.Address, x => x.Url, x => x.ContractAddress,
-                (address, url, contractAddress) => Utils.IsValidAddress(address) && Utils.IsValidAddress(contractAddress) && Utils.IsValidUrl(url));
+                (address, url, contractAddress) => Nethereum.UI.Util.Utils.IsValidAddress(address) && Nethereum.UI.Util.Utils.IsValidAddress(contractAddress) && Nethereum.UI.Util.Utils.IsValidUrl(url));
 
             isValidRefreshBalance.Where(x => x == true)
                 .Subscribe(async _ => await RefreshBalanceAsync());

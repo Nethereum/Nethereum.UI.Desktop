@@ -1,6 +1,7 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vmDesign="clr-namespace:Nethereum.UI.Desktop.Views.StandardToken.Designers;assembly=Nethereum.UI.Desktop"
+			  x:Class="Nethereum.UI.Desktop.Views.StandardToken.StandardTokenBalanceOfUserControl"
              >
   <Design.DataContext>
     <vmDesign:StandardTokenBalanceOfViewModelDesigner/>

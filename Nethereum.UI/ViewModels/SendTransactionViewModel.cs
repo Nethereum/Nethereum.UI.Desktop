@@ -10,7 +10,6 @@ namespace Nethereum.UI.ViewModels
 {
     public class SendTransactionViewModel : SendTransactionBaseViewModel
     {
-
         public SendTransactionViewModel()
         {
             Gas = (ulong)Signer.Transaction.DEFAULT_GAS_LIMIT;
@@ -62,8 +61,7 @@ namespace Nethereum.UI.ViewModels
             return null;
         }
 
-      
-
+     
         public string GetConfirmationMessage()
         {
             return

@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:Nethereum.UI.Desktop.ViewModels;assembly=Nethereum.UI.Desktop"
              xmlns:controlsStandardToken="clr-namespace:Nethereum.UI.Desktop.Views.StandardToken;assembly=Nethereum.UI.Desktop"
+			 x:Class="Nethereum.UI.Desktop.Views.StandardToken.StandardTokenUserControl"
              >
   <Design.DataContext>
     <vm:StandardTokenViewModel/>

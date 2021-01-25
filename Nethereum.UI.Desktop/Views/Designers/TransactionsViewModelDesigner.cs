@@ -1,3 +1,4 @@
+using DynamicData;
 using Nethereum.UI.ViewModels;
 
 namespace Nethereum.UI.Desktop.Views

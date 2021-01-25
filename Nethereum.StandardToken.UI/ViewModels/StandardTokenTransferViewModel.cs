@@ -44,9 +44,9 @@ namespace Nethereum.StandardToken.UI.ViewModels
                 x => x.Url,
                 x => x.Account,
                 (addressTo, amount, url, account) =>
-                    Utils.IsValidAddress(addressTo) &&
+                    Nethereum.UI.Util.Utils.IsValidAddress(addressTo) &&
                     amount != null &&
-                    Utils.IsValidUrl(url) &&
+                    Nethereum.UI.Util.Utils.IsValidUrl(url) &&
                     account != null);
 
             this._executeTrasnactionCommand = ReactiveCommand.CreateFromTask(ExecuteAsync, canExecuteTransaction);

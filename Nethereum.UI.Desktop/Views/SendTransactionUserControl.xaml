@@ -3,6 +3,7 @@
              xmlns:vm="clr-namespace:Nethereum.UI.ViewModels;assembly=Nethereum.UI" 
              xmlns:conv="clr-namespace:Nethereum.UI.Desktop.Converters;assembly=Nethereum.UI.Desktop"
              xmlns:vmDesign="clr-namespace:Nethereum.UI.Desktop.Views.Designers;assembly=Nethereum.UI.Desktop"
+			  x:Class="Nethereum.UI.Desktop.Views.SendTransactionUserControl"
              >
   <Design.DataContext>
     <vmDesign:SendTransactionViewModelDesigner/>

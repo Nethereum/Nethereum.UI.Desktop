@@ -1,4 +1,5 @@
 using System.Reactive;
+using DynamicData;
 using Genesis.Ensure;
 using ReactiveUI;
 using ReactiveUI.Legacy;
@@ -7,7 +8,7 @@ namespace Nethereum.UI.ViewModels
 {
     public class HdWalletAccountLoaderViewModel : ReactiveObject
     {
-        public ReactiveList<HdWalletAccountViewModel> Accounts { get; set; } = new ReactiveList<HdWalletAccountViewModel>();
+        public SourceList<HdWalletAccountViewModel> Accounts { get; set; } = new SourceList<HdWalletAccountViewModel>();
 
         private string _words;
         private string _seedPassword;
