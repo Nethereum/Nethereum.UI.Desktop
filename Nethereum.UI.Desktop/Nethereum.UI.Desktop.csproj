@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+	  <OutputType>WinExe</OutputType>
+	  <TargetFramework>netcoreapp3.1</TargetFramework>
+	  <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nethereum.StandardToken.UI\Nethereum.StandardToken.UI.csproj" />
@@ -10,9 +11,31 @@
    <ItemGroup>
 		<Folder Include="Models\" />
 		<AvaloniaResource Include="Assets\**" />
+	    <AvaloniaXaml Include="*.xaml" />
 </ItemGroup>
    <ItemGroup>
-     <AvaloniaXaml Include="App.xaml" />
+     <None Remove="Styles\Icons.xaml" />
+     <None Remove="Styles\SideBar.xaml" />
+     <None Remove="Styles\Styles.xaml" />
+     <None Remove="Views\AccountUserControl.xaml" />
+     <None Remove="Views\KeystoreAccountLoaderUserControl.xaml" />
+     <None Remove="Views\MainWindow.xaml" />
+     <None Remove="Views\PrivateKeyAccountLoaderUserControl.xaml" />
+     <None Remove="Views\SendTransactionUserControl.xaml" />
+     <None Remove="Views\StandardToken\StandardTokenBalanceOfUserControl.xaml" />
+     <None Remove="Views\StandardToken\StandardTokenContractAddressUserControl.xaml" />
+     <None Remove="Views\StandardToken\StandardTokenTransferUserControl.xaml" />
+     <None Remove="Views\StandardToken\StandardTokenUserControl.xaml" />
+     <None Remove="Views\TransactionsUserControl.xaml" />
+   </ItemGroup>
+   <ItemGroup>
+     <AvaloniaResource Include="Styles\SideBar.xaml" />
+     <AvaloniaResource Include="Styles\Icons.xaml">
+       <Generator>MSBuild:Compile</Generator>
+     </AvaloniaResource>
+     <AvaloniaResource Include="Styles\Styles.xaml" />
+   </ItemGroup>
+   <ItemGroup>
      <AvaloniaXaml Include="Views\AccountUserControl.xaml" />
      <AvaloniaXaml Include="Views\KeystoreAccountLoaderUserControl.xaml" />
      <AvaloniaXaml Include="Views\MainWindow.xaml" />
@@ -24,6 +47,7 @@
      <AvaloniaXaml Include="Views\StandardToken\StandardTokenUserControl.xaml" />
      <AvaloniaXaml Include="Views\TransactionsUserControl.xaml" />
    </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="DynamicData" Version="7.1.1" />
     <PackageReference Include="Splat" Version="10.0.1" />

@@ -10,43 +10,52 @@
         <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
         <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
 		<FluentTheme Mode="Dark"/>
-        <Style Selector="TextBlock.formLabel">
-          <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-          <Setter Property="Margin" Value="5"/>
-        </Style>
-      <Style Selector="TextBlock.formValue">
-        <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
-        <Setter Property="Margin" Value="5"/>
-      </Style>
-      <Style Selector="TextBox.formTextBox">
-          <Setter Property="Width" Value="300"/>
-          <Setter Property="Margin" Value="5"/>
-          <Setter Property="HorizontalAlignment" Value="Left"/>
-        </Style>
-      <Style Selector="Button.formMainAction">
-        <Setter Property="Width" Value="200"/>
-        <Setter Property="Margin" Value="5"/>
-        <Setter Property="HorizontalAlignment" Value="Right"/>
-      </Style>
 
-        <Style Selector="TabControl.mainTab TabStripItem">
-          <Setter Property="Foreground" Value="{DynamicResource ThemeAccentBrush1}"/>
-          <Setter Property="FontSize" Value="{DynamicResource FontSizeLarge}"/>
-          <Setter Property="FontWeight" Value="Bold"/>
-          <Setter Property="Padding" Value="5"/>
-        </Style>
+		<StyleInclude Source="/Styles/Styles.xaml" />
+		<StyleInclude Source="/Styles/SideBar.xaml" />
+		<StyleInclude Source="/Styles/Icons.xaml" />
 
-      <Style Selector="TabControl.mainTab TabItem">
-        <Setter Property="BorderBrush" Value="Black"/>
-        <Setter Property="BorderThickness" Value="1"/>
-      </Style>
-      
-      <Style Selector="TabControl.mainTab TabStripItem:selected">
-          <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush2}"/>
-        </Style>
+		<Style Selector="TextBlock.formLabel">
+			<Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="Margin" Value="5"/>
+		</Style>
+		<Style Selector="TextBlock.formValue">
+			<Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
+			<Setter Property="Margin" Value="5"/>
+		</Style>
+		<Style Selector="TextBox.formTextBox">
+			<Setter Property="Width" Value="300"/>
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+		</Style>
+		<Style Selector="Button.formMainAction">
+			<Setter Property="Width" Value="200"/>
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+		</Style>
+
 		
+		<Style Selector="TabControl.mainTab > TabItem">
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="Margin" Value="0"/>
+			<Setter Property="Padding" Value="16"/>
+			<Setter Property="Width" Value="240" />
+			<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+			<Setter Property="(ScrollViewer.HorizontalScrollBarVisibility)" Value="Auto"/>
+			<Setter Property="(ScrollViewer.VerticalScrollBarVisibility)" Value="Auto"/>
+		</Style>
+		<Style Selector="TabControl.mainTab > TabItem:selected /template/ Border#PART_SelectedPipe">
+			<Setter Property="IsVisible" Value="False" />
+		</Style>
+		<Style Selector="TabControl.mainTab > TabItem:selected">
+			<Setter Property="Background" Value="#1fffffff"/>
+		</Style>
 
+		<Style Selector="TabControl.mainTab > TabItem:pointerover /template/ Border#PART_LayoutRoot">
+			<Setter Property="Background" Value="#3fffffff"/>
+		</Style>
 
 	</Application.Styles>
 </Application>
