@@ -7,7 +7,7 @@ namespace Nethereum.UI.Desktop.Views
     {
         public TransactionsViewModelDesigner()
         {
-            Transactions.Add(new TransactionViewModel()
+            Transactions.Add(new[] { new TransactionViewModel()
             {
                 Amount = 10,
                 BlockHash = "0x13f022d72158410433cbd66f5dd8bf6d2d129924",
@@ -17,10 +17,10 @@ namespace Nethereum.UI.Desktop.Views
                 Gas = 12345,
                 Nonce = 2,
                 Status = TransactionViewModel.STATUS_INPROGRESS
-               
-            });
 
-            Transactions.Add(new TransactionViewModel()
+            },
+
+            new TransactionViewModel()
             {
                 Amount = 15,
                 BlockHash = "0x13f022d72158410433cbd66f5dd8bf6d2d129924",
@@ -31,7 +31,7 @@ namespace Nethereum.UI.Desktop.Views
                 Nonce = 1,
                 Status = TransactionViewModel.STATUS_COMPLETED
 
-            });
+            }});
         }
     }
 }

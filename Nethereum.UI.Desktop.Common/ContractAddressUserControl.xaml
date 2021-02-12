@@ -1,0 +1,20 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:Nethereum.UI.Desktop.Common.Converters;assembly=Nethereum.UI.Desktop.Common"
+             xmlns:vmDesign="clr-namespace:Nethereum.UI.Desktop.Common.Designers;assembly=Nethereum.UI.Desktop.Common"
+			  x:Class="Nethereum.UI.Desktop.Common.ContractAddressUserControl"
+             >
+  <Design.DataContext>
+    <vmDesign:ContractAddressModelDesigner/>
+  </Design.DataContext>
+
+  <Grid ColumnDefinitions="180,Auto" RowDefinitions="Auto">
+    <TextBlock Text="Contract Address:" Classes="formLabel" Grid.Column="0" Grid.Row="0" />
+	  <StackPanel Grid.Column="1" Grid.Row="0">
+		  <TextBox Text="{Binding ContractAddress}" Classes="formTextBox" />
+		  <TextBlock x:Name="contractAddressValidation" Classes="formError" IsVisible="{Binding !ValidContractAddress}" >
+			  Address is not valid
+		  </TextBlock>
+	  </StackPanel>  
+  </Grid>
+</UserControl>

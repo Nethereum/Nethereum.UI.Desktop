@@ -1,0 +1,40 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Nethereum.UI.ViewModels;assembly=Nethereum.UI" 
+             xmlns:vmDesign="clr-namespace:Nethereum.UI.Desktop.Views;assembly=Nethereum.UI.Desktop"
+			 x:Class="Nethereum.UI.Desktop.Views.HdWalletUserControl"
+             >
+  <Design.DataContext>
+		<vmDesign:HdWalletAccountLoaderViewModelDesigner/>
+  </Design.DataContext>
+
+	<DockPanel>
+  <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="Auto, Auto, Auto, Auto" Margin="16" DockPanel.Dock="Top">
+    <TextBlock Text="Words:" Classes="formLabel" Grid.Column="0" Grid.Row="0" />
+    <TextBox Text="{Binding Words}" Classes="formTextBox" Grid.Column="1" Grid.Row="0"/>
+    <TextBlock Text="Password:" Classes="formLabel" Grid.Column="0" Grid.Row="1"/>
+    <TextBox Text="{Binding SeedPassword}" PasswordChar="*" Classes="formTextBox" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"/>
+	<Button Content="Load Accounts" Classes="formMainAction" Command="{Binding LoadAccounts}"
+			  Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" />
+  </Grid>
+	  <DataGrid  Height="300" SelectedItem="{Binding SelectedAccount}" IsVisible="{Binding Accounts.Count}" Items="{Binding Accounts}" DockPanel.Dock="Bottom" CanUserResizeColumns="True">
+		  <DataGrid.Columns>
+			  <DataGridTextColumn Header="Index"
+								  Binding="{Binding Index}"
+								  Width="100" />
+			  <DataGridTextColumn Header="Account"
+								  Binding="{Binding Address}"
+								  Width="300" />
+			  <DataGridTemplateColumn Header="Select"
+								  Width="100">
+				  <DataGridTemplateColumn.CellTemplate>
+					  <DataTemplate>
+							<Button Command="{Binding LoadAccountFromPrivateKey}">Select</Button>
+					  </DataTemplate>
+				  </DataGridTemplateColumn.CellTemplate>
+			  </DataGridTemplateColumn>
+	  </DataGrid.Columns>
+	  </DataGrid>
+  
+	</DockPanel>
+</UserControl>

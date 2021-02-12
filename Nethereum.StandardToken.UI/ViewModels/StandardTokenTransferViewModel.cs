@@ -1,94 +1,84 @@
-using System;
-using System.Reactive.Linq;
-using System.Threading.Tasks;
 using Genesis.Ensure;
-using Nethereum.Hex.HexTypes;
+using Nethereum.Contracts;
+using Nethereum.Hex.HexConvertors.Extensions;
 using Nethereum.StandardToken.UI.SmartContractMessages;
-using Nethereum.StandardToken.UI.UIMessages;
-using Nethereum.UI.UIMessages;
-using Nethereum.UI.Util;
+using Nethereum.UI;
+using Nethereum.UI.Services;
 using Nethereum.UI.ViewModels;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+using ReactiveUI.Validation.Extensions;
+using ReactiveUI.Validation.Helpers;
+using System;
+using System.Reactive;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
 
 namespace Nethereum.StandardToken.UI.ViewModels
 {
-    public class StandardTokenTransferViewModel : SendTransactionBaseViewModel
+    public class StandardTokenTransferViewModel : ReactiveValidationObject
     {
-        private string _contractAddress;
-        public string ContractAddress
+        [Reactive] public string ContractAddress { get; set; }
+        [Reactive] public string AddressTo { get; set; }
+        [Reactive] public decimal? Amount { get; set; }
+        
+        private readonly IEthereumHostProvider _ethereumHostProvider;
+        private readonly IContractService _contractService;
+        private readonly IScreen _screenHost;
+
+        protected ReactiveCommand<Unit, Unit> _executeTransactionCommand;
+        public ReactiveCommand<Unit, Unit> ExecuteTransactionCommand => this._executeTransactionCommand;
+
+
+        protected StandardTokenTransferViewModel()
         {
-            get => _contractAddress;
-            set => this.RaiseAndSetIfChanged(ref _contractAddress, value);
+
         }
 
-        private decimal? _amount;
-        public decimal? Amount
+        public StandardTokenTransferViewModel(IEthereumHostProvider ethereumHostProvider, IContractService contractService, IScreen screenHost) 
         {
-            get => _amount;
-            set => this.RaiseAndSetIfChanged(ref _amount, value);
-        }
+            this._ethereumHostProvider = ethereumHostProvider;
+            this._contractService = contractService;
+            this._screenHost = screenHost;
+            this._contractService.ContractAddress.Subscribe(x => ContractAddress = x);
 
-        public StandardTokenTransferViewModel()
-        {
-            GasPrice = (ulong)Signer.Transaction.DEFAULT_GAS_PRICE;
+            this.ValidationRule(x => x.AddressTo, address => Nethereum.UI.Util.Utils.IsValidAddress(address), "Address is not valid");
+            this.ValidationRule(x => x.Amount, amount => amount >= 0, "Amount cannot be negative");
 
-            MessageBus.Current.Listen<StandardTokenAddressChanged>().Subscribe(x =>
-                {
-                    ContractAddress = x.Address;
-                }
-            );
+           
 
             var canExecuteTransaction = this.WhenAnyValue(
                 x => x.AddressTo,
                 x => x.Amount,
-                x => x.Url,
-                x => x.Account,
-                (addressTo, amount, url, account) =>
+                x => x.ContractAddress,
+                (addressTo, amount, contractAddress) =>
                     Nethereum.UI.Util.Utils.IsValidAddress(addressTo) &&
-                    amount != null &&
-                    Nethereum.UI.Util.Utils.IsValidUrl(url) &&
-                    account != null);
+                    amount != null && amount > 0 &&
+                    contractAddress != null);
 
-            this._executeTrasnactionCommand = ReactiveCommand.CreateFromTask(ExecuteAsync, canExecuteTransaction);
+            var canExecuteAndEnabled = Observable.CombineLatest(canExecuteTransaction, _ethereumHostProvider.EnabledCallBack, (valid, enabled) => valid && enabled);
+
+            this._executeTransactionCommand = ReactiveCommand.CreateFromTask(ExecuteAsync, canExecuteAndEnabled);
+   
         }
 
-
-        public async Task<string> ExecuteAsync()
+        public async Task ExecuteAsync()
         {
             Ensure.ArgumentNotNullOrEmpty(this.AddressTo, "Address To");
-            Ensure.ArgumentNotNullOrEmpty(this.Url, "Url");
-            Ensure.ArgumentNotNull(this.Account, "Account");
             Ensure.ArgumentNotNull(this.Amount, "Token Amount");
 
-            var confirmed = await _confirmTransfer.Handle(GetConfirmationMessage());
+            var transferfuction =
+                                    new TransferFunction
+                                    {
+                                        TokenAmount = Web3.Web3.Convert.ToWei(Amount.Value),
+                                        To = AddressTo
+                                    };
 
-            if (confirmed)
-            {
-                var web3 = new Web3.Web3(Account, Url);
+            var transactionViewModel = new SendTransactionViewModel(_ethereumHostProvider, _screenHost);
+            await transactionViewModel.InitialiseAsync(transferfuction, ContractAddress);
+            await _screenHost.Router.Navigate.Execute(transactionViewModel);
 
-                var transferfuction =
-                    new TransferFunction
-                    {
-                        TokenAmount = Web3.Web3.Convert.ToWei(Amount.Value),
-                        To = AddressTo,
-                        FromAddress = web3.TransactionManager.Account.Address
-                    };
-                 
-                if (Gas != null) transferfuction.Gas = new HexBigInteger(Gas.Value);
-                if (GasPrice != null) transferfuction.GasPrice = new HexBigInteger(GasPrice.Value);
-
-                var handler = web3.Eth.GetContractHandler(ContractAddress);
-                var transactionHash = await handler.SendRequestAsync(transferfuction);
-                MessageBus.Current.SendMessage<TransactionAdded>(new TransactionAdded(transactionHash));
-                return transactionHash;
-            }
-            return null;
         }
 
-        public string GetConfirmationMessage()
-        {
-            return
-                $"Are you sure you want to make this transfer: \n\r To: {AddressTo} \n\r Token Amount: {Amount}";
-        }
     }
 }

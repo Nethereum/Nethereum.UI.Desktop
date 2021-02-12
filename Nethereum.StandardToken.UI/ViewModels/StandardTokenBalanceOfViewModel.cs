@@ -1,78 +1,56 @@
+using Genesis.Ensure;
+using Nethereum.StandardToken.UI.SmartContractMessages;
+using Nethereum.UI;
+using Nethereum.UI.Services;
+using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+using ReactiveUI.Validation.Helpers;
 using System;
 using System.Numerics;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Genesis.Ensure;
-using Nethereum.StandardToken.UI.SmartContractMessages;
-using Nethereum.StandardToken.UI.UIMessages;
-using Nethereum.UI.UIMessages;
-using Nethereum.UI.Util;
-using ReactiveUI;
 
 namespace Nethereum.StandardToken.UI.ViewModels
 {
-    public class StandardTokenBalanceOfViewModel : ReactiveObject
+    public class StandardTokenBalanceOfViewModel : ReactiveValidationObject
     {
-        private string _url;
-        public string Url
-        {
-            get => _url;
-            set => this.RaiseAndSetIfChanged(ref _url, value);
-        }
-
-        private string _contractAddress;
-        public string ContractAddress
-        {
-            get => _contractAddress;
-            set => this.RaiseAndSetIfChanged(ref _contractAddress, value);
-        }
-
-        private string _address;
-        public string Address
-        {
-            get => _address;
-            set => this.RaiseAndSetIfChanged(ref _address, value);
-        }
-
-        private decimal _balance;
-        public decimal Balance
-        {
-            get => _balance;
-            set => this.RaiseAndSetIfChanged(ref _balance, value);
-        }
+        [Reactive] public string ContractAddress { get; set; }
+        [Reactive] public string AccountAddress { get; set; }
+        [Reactive] public decimal Balance { get; set; }
 
         private readonly ReactiveCommand<Unit, bool> _refreshBalanceCommand;
+        private readonly IEthereumHostProvider ethereumHostProvider;
+        private readonly IContractService contractService;
+
         public ReactiveCommand<Unit, bool> RefreshBalanceCommand => this._refreshBalanceCommand;
 
-        public StandardTokenBalanceOfViewModel()
+        protected StandardTokenBalanceOfViewModel()
         {
-            MessageBus.Current.Listen<UrlChanged>().Subscribe(x =>
-                {
-                    Url = x.Url;
-                }
-            );
 
-            MessageBus.Current.Listen<StandardTokenAddressChanged>().Subscribe(x =>
-                {
-                    ContractAddress = x.Address;
-                }
-            );
+        }
 
-            MessageBus.Current.Listen<AccountLoaded>().Subscribe(x =>
-                {
-                    Address = x.Account.Address;
-                }
-            );
+        public StandardTokenBalanceOfViewModel(IEthereumHostProvider ethereumHostProvider, IContractService contractService)
+        {
+            this.ethereumHostProvider = ethereumHostProvider;
+            this.ethereumHostProvider.SelectedAccountCallback.Subscribe(address => AccountAddress = address);
 
-            var isValidRefreshBalance = this.WhenAnyValue(x => x.Address, x => x.Url, x => x.ContractAddress,
-                (address, url, contractAddress) => Nethereum.UI.Util.Utils.IsValidAddress(address) && Nethereum.UI.Util.Utils.IsValidAddress(contractAddress) && Nethereum.UI.Util.Utils.IsValidUrl(url));
+            this.contractService = contractService;
+            this.contractService.ContractAddress.Subscribe(x => ContractAddress = x);
+
+            var hasValidAddresses = this.WhenAnyValue(x => x.AccountAddress, x => x.ContractAddress,
+                (address, contractAddress) => Nethereum.UI.Util.Utils.IsValidAddress(address) && Nethereum.UI.Util.Utils.IsValidAddress(contractAddress));
+
+            var isValidRefreshBalance = Observable.CombineLatest(hasValidAddresses, this.ethereumHostProvider.EnabledCallBack, (validAdress, enabled) => validAdress && enabled);
 
             isValidRefreshBalance.Where(x => x == true)
                 .Subscribe(async _ => await RefreshBalanceAsync());
 
             _refreshBalanceCommand = ReactiveCommand.CreateFromTask(RefreshBalanceAsync, isValidRefreshBalance);
+         
         }
+
 
         public async Task<bool> RefreshBalanceAsync()
         {
@@ -82,13 +60,12 @@ namespace Nethereum.StandardToken.UI.ViewModels
 
         public async Task<decimal> GetBalanceAsync()
         {
-            Ensure.ArgumentNotNull(this.Address, "Address");
-            Ensure.ArgumentNotNull(this.Url, "Url");
+            Ensure.ArgumentNotNull(this.AccountAddress, "Address");
             Ensure.ArgumentNotNull(this.ContractAddress, "ContractAddress");
 
-            var web3 = new Web3.Web3(Url);
+            var web3 = await ethereumHostProvider.GetWeb3Async();
             var handler = web3.Eth.GetContractHandler(ContractAddress);
-            var balanceMessage = new BalanceOfFunction(){Owner = Address};
+            var balanceMessage = new BalanceOfFunction(){Owner = AccountAddress};
             var balance = await handler.QueryAsync<BalanceOfFunction,BigInteger>(balanceMessage);
             
             //assuming all have 18 decimals

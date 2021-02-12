@@ -1,9 +1,9 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:Nethereum.UI.ViewModels;assembly=Nethereum.UI" 
-             xmlns:conv="clr-namespace:Nethereum.UI.Desktop.Converters;assembly=Nethereum.UI.Desktop"
+             xmlns:conv="clr-namespace:Nethereum.UI.Desktop.Common.Converters;assembly=Nethereum.UI.Desktop.Common"
              xmlns:vmDesign="clr-namespace:Nethereum.UI.Desktop.Views.Designers;assembly=Nethereum.UI.Desktop"
-			  x:Class="Nethereum.UI.Desktop.Views.SendTransactionUserControl"
+			 x:Class="Nethereum.UI.Desktop.Views.SendTransactionUserControl"
              >
   <Design.DataContext>
     <vmDesign:SendTransactionViewModelDesigner/>
@@ -13,29 +13,39 @@
     <conv:NullableUInt64Converter x:Key="nullableUInt64Converter"/>
   </UserControl.Resources>
   
-  <Grid ColumnDefinitions="Auto,Auto" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" Margin="16">
+  <Grid ColumnDefinitions="180,Auto" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto">
     <TextBlock Text="To Address:" Classes="formLabel" Grid.Column="0" Grid.Row="0" />
-    <TextBox Text="{Binding AddressTo}" Classes="formTextBox" Grid.Column="1" Grid.Row="0"/>
-    
-    <TextBlock Text="Amount in Ether:" Classes="formLabel" Grid.Column="0" Grid.Row="1"/>
-    <TextBox Text="{Binding AmountInEther, Converter={StaticResource nullableDecimalConverter}}"  Classes="formTextBox" Grid.Column="1" Grid.Row="1"/>
+	  <StackPanel Grid.Column="1" Grid.Row="0">
+		  <TextBox Text="{Binding AddressTo}" Classes="formTextBox" />
+		  <TextBlock x:Name="ToValidation" Classes="formError" />
+	  </StackPanel>
+	  
+      <TextBlock Text="Amount in Ether:" Classes="formLabel" Grid.Column="0" Grid.Row="1"/>
 
-    <TextBlock Text="Gas:" Classes="formLabel" Grid.Column="0" Grid.Row="2"/>
+	  <StackPanel Grid.Column="1" Grid.Row="1">
+        <TextBox Text="{Binding AmountInEther, Converter={StaticResource nullableDecimalConverter}}"  Classes="formTextBox" />
+	    <TextBlock  x:Name="AmountValidation" Classes="formError"/>
+	  </StackPanel>
+	
+	<TextBlock Text="Gas:" Classes="formLabel" Grid.Column="0" Grid.Row="2"/>
     <TextBox Text="{Binding Gas, Converter={StaticResource nullableUInt64Converter}}"  Classes="formTextBox" Grid.Column="1" Grid.Row="2"/>
 
     <TextBlock Text="Gas Price:" Classes="formLabel" Grid.Column="0" Grid.Row="3"/>
-    <TextBox Text="{Binding GasPrice, Converter={StaticResource nullableUInt64Converter}}"  Classes="formTextBox" Grid.Column="1" Grid.Row="3"/>
+    <TextBox Text="{Binding GasPrice}"  Classes="formTextBox" Grid.Column="1" Grid.Row="3"/>
 
     <TextBlock Text="Nonce (Optional):" Classes="formLabel" Grid.Column="0" Grid.Row="4"/>
     <TextBox Text="{Binding Nonce, Converter={StaticResource nullableUInt64Converter}}"  Classes="formTextBox" Grid.Column="1" Grid.Row="4"/>
 
-
     <TextBlock Text="Data (Optional):" Classes="formLabel" Grid.Column="0" Grid.Row="5"/>
     <TextBox Text="{Binding Data}"  Classes="formTextBox" Grid.Column="1" Grid.Row="5"/>
 
-
+	  <StackPanel Orientation="Horizontal"  Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" HorizontalAlignment="Right" >
+	    <Button Content="Back" Classes="formMainAction" Command="{Binding GoBackCommand}" IsVisible="{Binding HostScreen, Converter={x:Static ObjectConverters.IsNotNull}}"
+		  />
+	  
     <Button Content="Send Transaction" Classes="formMainAction" Command="{Binding ExecuteTransactionCommand}"
-            Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" />
+         />
+	  </StackPanel>
     
   </Grid>
 </UserControl>

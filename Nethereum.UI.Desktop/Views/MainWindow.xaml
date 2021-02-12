@@ -2,20 +2,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:Nethereum.UI.Desktop.ViewModels;assembly=Nethereum.UI.Desktop"
         xmlns:controls="clr-namespace:Nethereum.UI.Desktop.Views;assembly=Nethereum.UI.Desktop"
-        xmlns:controlsStandardToken="clr-namespace:Nethereum.UI.Desktop.Views.StandardToken;assembly=Nethereum.UI.Desktop"
+        xmlns:controlsStandardToken="clr-namespace:Nethereum.StandardToken.Desktop;assembly=Nethereum.StandardToken.Desktop"
 		x:Class="Nethereum.UI.Desktop.Views.MainWindow"
 		xmlns:pages="clr-namespace:Nethereum.UI.Desktop.Views;assembly=Nethereum.UI.Desktop"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="Nethereum Simple Wallet">
+        Icon="/Assets/logo.ico"
+        Title="Nethereum Desktop Starter">
   <Design.DataContext> 
     <vm:MainWindowViewModel/>
   </Design.DataContext>
 
 	<Panel>
 		<DockPanel HorizontalAlignment="Stretch">
+			
 			<ExperimentalAcrylicBorder DockPanel.Dock="Left" Width="240">
+				<StackPanel VerticalAlignment="Top" Margin="10">
+					<Image Source="/Assets/logo192x192t.png" VerticalAlignment="Top" Width="100" HorizontalAlignment="Center"/>
+					<TextBlock FontSize="16" FontWeight="Light" HorizontalAlignment="Center">Nethereum</TextBlock>
+				</StackPanel>
 				<ExperimentalAcrylicBorder.Material>
 					<ExperimentalAcrylicMaterial TintColor="Black" MaterialOpacity="0.85" TintOpacity="1" />
+					
 				</ExperimentalAcrylicBorder.Material>
 				
 			</ExperimentalAcrylicBorder>
@@ -23,44 +29,54 @@
 				<ExperimentalAcrylicBorder.Material>
 					<ExperimentalAcrylicMaterial TintColor="#222222" MaterialOpacity="0.85" TintOpacity="1" />
 				</ExperimentalAcrylicBorder.Material>
+				
 				<Grid ColumnDefinitions="*, Auto">
 					<TextBlock Text="{Binding #TabControl.SelectedItem.Header}" Margin="40 20" FontSize="32" FontWeight="Light" />
-					<controls:AccountUserControl  VerticalAlignment="Top" HorizontalAlignment="Right" DataContext="{Binding AccountViewModel}" Grid.Column="1"/>
+					<StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" Grid.Column="1">
+						<controls:AccountUserControl   DataContext="{Binding AccountViewModel}" />
+						<controls:UrlSettingUserControl   DataContext="{Binding UrlSettingViewModel}" />
+						
+					</StackPanel>
 				</Grid>
 			</ExperimentalAcrylicBorder>
 		</DockPanel>
 
 		<DockPanel>
 		<TabControl x:Name="TabControl" Classes="sidebar" Margin="0 80 0 20" Grid.ColumnSpan="2" DockPanel.Dock="Top">
-			<TabItem Header="Overview">
+			<TabItem Header="My Accounts">
+				<Border HorizontalAlignment="Stretch" BorderBrush="Black" BorderThickness="1">
+					<controls:AccountsUserControl HorizontalAlignment="Left" Margin="20" DataContext="{Binding AccountsViewModel}" />
+				</Border>
 			</TabItem>
-			<TabItem Header="Send Ether">
-				<Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto,*">
-					<controls:SendTransactionUserControl HorizontalAlignment="Left" DataContext="{Binding SendTransactionViewModel}" Grid.Row="0"/>
-					
-				</Grid>
+			<TabItem Header="Send Transaction">
+				<Border HorizontalAlignment="Stretch" BorderBrush="Black" BorderThickness="1">
+					<controls:SendTransactionUserControl HorizontalAlignment="Left" Margin="20" DataContext="{Binding SendTransactionViewModel}" />
+				</Border>
+			</TabItem>			 
+			<TabItem Header="Send ERC20 Token" >
+				<Border HorizontalAlignment="Stretch" BorderBrush="Black" BorderThickness="1">
+					<controlsStandardToken:StandardTokenUserControl HorizontalAlignment="Left" Margin="20" DataContext="{Binding StandardTokenViewModel}"  />
+				</Border>
 			</TabItem>
-			<TabItem Header="Send Token">
-				<Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto,*">
-					<controlsStandardToken:StandardTokenUserControl HorizontalAlignment="Left" Margin="20" DataContext="{Binding StandardTokenViewModel}" Grid.Column="0" />
-				</Grid>
-			</TabItem>
-			<TabItem Header="Accounts">
-				<TabControl Classes="mainTab">
-					<TabItem Header="Load Using Private Key">
-						<controls:PrivateKeyAccountLoaderUserControl HorizontalAlignment="Left" Width="420" DataContext="{Binding PrivateKeyLoaderViewModel}"/>
-					</TabItem>
-					<TabItem Header="Load Using Key Store">
-						<controls:KeystoreAccountLoaderUserControl HorizontalAlignment="Left" DataContext="{Binding KeyStoreLoaderViewModel}"/>
-					</TabItem>
-					<TabItem Header="Load Using Hd Wallet">
-					</TabItem>
-				</TabControl>
+			<TabItem Header="Add Accounts">
+				<Border HorizontalAlignment="Stretch" BorderBrush="Black" BorderThickness="1">
+					<TabControl Classes="mainTab">
+						<TabItem Header="Load Using Private Key">
+							<controls:PrivateKeyAccountLoaderUserControl HorizontalAlignment="Left" Width="420" DataContext="{Binding PrivateKeyLoaderViewModel}"/>
+						</TabItem>
+						<TabItem Header="Load Using Key Store">
+							<controls:KeystoreAccountLoaderUserControl HorizontalAlignment="Left" DataContext="{Binding KeyStoreLoaderViewModel}"/>
+						</TabItem>
+						<TabItem Header="Load Using Hd Wallet">
+							<controls:HdWalletUserControl HorizontalAlignment="Left" DataContext="{Binding HdWalletAccountLoaderViewModel}"/>
+						</TabItem>
+					</TabControl>
+				</Border>
 			</TabItem>
 			
 		</TabControl>
 
-		<ScrollViewer DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Height="200" Margin="240 0 0 0">
+		<ScrollViewer DockPanel.Dock="Bottom" HorizontalAlignment="Stretch" Height="200" Margin="240 0 0 0" >
 			<controls:TransactionsUserControl  DataContext="{Binding TransactionsViewModel}"/>
 		</ScrollViewer>
 		</DockPanel>

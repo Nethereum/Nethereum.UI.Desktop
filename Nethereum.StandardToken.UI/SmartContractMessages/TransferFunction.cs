@@ -1,7 +1,6 @@
-using System.Numerics;
 using Nethereum.ABI.FunctionEncoding.Attributes;
 using Nethereum.Contracts;
-using Nethereum.Contracts.CQS;
+using System.Numerics;
 
 namespace Nethereum.StandardToken.UI.SmartContractMessages
 {

@@ -1,0 +1,17 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vmDesign="clr-namespace:Nethereum.StandardToken.Desktop.Designers;assembly=Nethereum.StandardToken.Desktop"
+			  x:Class="Nethereum.StandardToken.Desktop.StandardTokenBalanceOfUserControl"
+             >
+  <Design.DataContext>
+    <vmDesign:StandardTokenBalanceOfViewModelDesigner/>
+  </Design.DataContext>
+  
+  <Grid ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="Auto, Auto, Auto, Auto">
+    <TextBlock Text="Balance:" Classes="formLabel" Grid.Column="0" Grid.Row="0"/>
+    <TextBlock Text="{Binding Balance}" Classes="formValue" Grid.Column="1" Grid.Row="0"/>
+	<Button Grid.Column="3" Grid.Row="0" HorizontalAlignment="Right" Command="{Binding RefreshBalanceCommand}">
+		<DrawingPresenter Width="16" Height="16" Drawing="{DynamicResource Ionicons.RefreshCircleMD}" />
+	</Button>
+  </Grid>
+</UserControl>

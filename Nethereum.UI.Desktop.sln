@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nethereum.UI.Desktop", "Net
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nethereum.StandardToken.UI", "Nethereum.StandardToken.UI\Nethereum.StandardToken.UI.csproj", "{E1ECFE47-6E5F-4908-A2DE-0E473F77D326}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nethereum.UI.HostProvider", "Nethereum.UI.HostProvider\Nethereum.UI.HostProvider.csproj", "{5BA2B3CA-FDFD-4980-9D90-A86EF6A8278C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nethereum.UI.Desktop.Common", "Nethereum.UI.Desktop.Common\Nethereum.UI.Desktop.Common.csproj", "{A39CB3B3-AA6C-429B-AB7A-319EED7FC855}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nethereum.StandardToken.Desktop", "Nethereum.StandardToken.Desktop\Nethereum.StandardToken.Desktop.csproj", "{B14A8706-A7B2-4D73-BCF4-EF094B77AA3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +33,18 @@ Global
 		{E1ECFE47-6E5F-4908-A2DE-0E473F77D326}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1ECFE47-6E5F-4908-A2DE-0E473F77D326}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1ECFE47-6E5F-4908-A2DE-0E473F77D326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BA2B3CA-FDFD-4980-9D90-A86EF6A8278C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BA2B3CA-FDFD-4980-9D90-A86EF6A8278C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BA2B3CA-FDFD-4980-9D90-A86EF6A8278C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BA2B3CA-FDFD-4980-9D90-A86EF6A8278C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A39CB3B3-AA6C-429B-AB7A-319EED7FC855}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A39CB3B3-AA6C-429B-AB7A-319EED7FC855}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A39CB3B3-AA6C-429B-AB7A-319EED7FC855}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A39CB3B3-AA6C-429B-AB7A-319EED7FC855}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B14A8706-A7B2-4D73-BCF4-EF094B77AA3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B14A8706-A7B2-4D73-BCF4-EF094B77AA3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B14A8706-A7B2-4D73-BCF4-EF094B77AA3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B14A8706-A7B2-4D73-BCF4-EF094B77AA3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

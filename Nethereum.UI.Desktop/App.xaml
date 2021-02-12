@@ -7,17 +7,22 @@
     </Application.DataTemplates>
 
     <Application.Styles>
-        <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
+		<!-- <StyleInclude Source="resm:Avalonia.Themes.Default.DefaultTheme.xaml?assembly=Avalonia.Themes.Default"/>
         <StyleInclude Source="resm:Avalonia.Themes.Default.Accents.BaseLight.xaml?assembly=Avalonia.Themes.Default"/>
-		<FluentTheme Mode="Dark"/>
+		-->
 
+		
+	
+		<FluentTheme Mode="Dark"/> 
+		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+		
 		<StyleInclude Source="/Styles/Styles.xaml" />
 		<StyleInclude Source="/Styles/SideBar.xaml" />
 		<StyleInclude Source="/Styles/Icons.xaml" />
 
 		<Style Selector="TextBlock.formLabel">
 			<Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
-			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="FontWeight" Value="ExtraLight"/>
 			<Setter Property="Margin" Value="5"/>
 		</Style>
 		<Style Selector="TextBlock.formValue">
@@ -29,6 +34,14 @@
 			<Setter Property="Margin" Value="5"/>
 			<Setter Property="HorizontalAlignment" Value="Left"/>
 		</Style>
+
+		<Style Selector="TextBlock.formError">
+			<Setter Property="FontSize" Value="{DynamicResource FontSizeSmall}"/>
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="HorizontalAlignment" Value="Right"/>
+			<Setter Property="Foreground" Value="Red"/>
+		</Style>
+		
 		<Style Selector="Button.formMainAction">
 			<Setter Property="Width" Value="200"/>
 			<Setter Property="Margin" Value="5"/>

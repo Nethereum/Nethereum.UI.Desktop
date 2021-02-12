@@ -1,54 +1,32 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:vm="clr-namespace:Nethereum.UI.ViewModels;assembly=Nethereum.UI"
-             xmlns:conv="clr-namespace:Nethereum.UI.Desktop.Converters;assembly=Nethereum.UI.Desktop"
              xmlns:vmDesign="clr-namespace:Nethereum.UI.Desktop.Views;assembly=Nethereum.UI.Desktop"
 			 x:Class="Nethereum.UI.Desktop.Views.TransactionsUserControl"
              >
   <Design.DataContext>
     <vmDesign:TransactionsViewModelDesigner/>
   </Design.DataContext>
-  <UserControl.Resources>
-    <conv:NullableDecimalConverter x:Key="nullableDecimalConverter"/>
-    <conv:NullableUInt64Converter x:Key="nullableUInt64Converter"/>
-  </UserControl.Resources>
-  <StackPanel>
-    <Grid Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="120"/>
-        <ColumnDefinition Width="120"/>
-        <ColumnDefinition Width="120"/>
-        <ColumnDefinition Width="120"/>
-        <ColumnDefinition Width="120"/>
-        <ColumnDefinition Width="120"/>
-      </Grid.ColumnDefinitions>
-      <TextBlock Text="Transaction Hash" TextWrapping="Wrap" Classes="formLabel" Grid.Column="0"/>
-      <TextBlock Text="Block Hash" TextWrapping="Wrap" Classes="formLabel" Grid.Column="1"/>
-      <TextBlock Text="From" TextWrapping="Wrap" Classes="formLabel" Grid.Column="2"/>
-      <TextBlock Text="To" TextWrapping="Wrap" Classes="formLabel" Grid.Column="3"/>
-      <TextBlock Text="Status" TextWrapping="Wrap" Classes="formLabel" Grid.Column="4"/>
-    </Grid>
-    <!--Issue https://github.com/AvaloniaUI/Avalonia/issues/1464 Converters are not displaying-->
-  <ListBox Height="1000" Name="listTransactions" Items="{Binding Path=Transactions}" BorderThickness="0" Margin="0 10 0 10" VerticalAlignment="Top">
-    <ListBox.ItemTemplate>
-      <DataTemplate>
-        <Grid Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="120"/>
-            <ColumnDefinition Width="120"/>
-          </Grid.ColumnDefinitions>
-          <TextBlock Text="{Binding Path=TransactionHash}" TextWrapping="Wrap" Classes="formValue" Grid.Column="0"/>
-          <TextBlock Text="{Binding Path=BlockHash}" TextWrapping="Wrap" Classes="formValue" Grid.Column="1"/>
-          <TextBlock Text="{Binding Path=From}" TextWrapping="Wrap" Classes="formValue" Grid.Column="2"/>
-          <TextBlock Text="{Binding Path=To}" TextWrapping="Wrap" Classes="formValue" Grid.Column="3"/>
-          <TextBlock Text="{Binding Path=Status}" TextWrapping="Wrap" Classes="formValue" Grid.Column="4"/>
-            </Grid>
-      </DataTemplate>
-    </ListBox.ItemTemplate>
-  </ListBox>
-  </StackPanel>
+	<StackPanel >
+		<DataGrid Height="300" IsVisible="{Binding Transactions.Count}" CanUserResizeColumns="True" Items="{Binding Transactions}">
+			<DataGrid.Columns>
+					<DataGridTextColumn Header="Transaction Hash"
+										Binding="{Binding TransactionHash}"
+										Width="150" />
+					<DataGridTextColumn Header="Block Hash"
+										Binding="{Binding BlockHash}"
+										Width="150" />
+					<DataGridTextColumn Header="From"
+										Binding="{Binding From}"
+										Width="150" />
+					<DataGridTextColumn Header="To"
+										Binding="{Binding To}"
+										Width="150" />
+					<DataGridTextColumn Header="Status"
+										Binding="{Binding Status}"
+										Width="150" />
+
+			</DataGrid.Columns>
+		</DataGrid>
+	</StackPanel>
 </UserControl>

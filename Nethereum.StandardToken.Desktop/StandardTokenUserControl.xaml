@@ -1,0 +1,21 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Nethereum.UI.Desktop.ViewModels;assembly=Nethereum.UI.Desktop"
+             xmlns:controlsStandardToken="clr-namespace:Nethereum.StandardToken.Desktop;assembly=Nethereum.StandardToken.Desktop"
+			 xmlns:nethereumcommon="clr-namespace:Nethereum.UI.Desktop.Common;assembly=Nethereum.UI.Desktop.Common"
+			 xmlns:vmDesign="clr-namespace:Nethereum.StandardToken.Desktop.Designers;assembly=Nethereum.StandardToken.Desktop"
+			 x:Class="Nethereum.StandardToken.Desktop.StandardTokenUserControl"
+			 xmlns:rxui="clr-namespace:Avalonia.ReactiveUI;assembly=Avalonia.ReactiveUI">
+             
+
+<rxui:RoutedViewHost Router="{Binding Router}" PageTransition="{x:Null}" >
+	<rxui:RoutedViewHost.DefaultContent>
+		<Grid ColumnDefinitions="Auto" RowDefinitions="Auto, Auto, Auto">
+			<nethereumcommon:ContractAddressUserControl DataContext="{Binding Path=ContractAdddressViewModel}" Grid.Row="0"/>
+			<controlsStandardToken:StandardTokenBalanceOfUserControl DataContext="{Binding Path=StandardTokenBalanceOfViewModel}" Grid.Row="1"/>
+			<controlsStandardToken:StandardTokenTransferUserControl DataContext="{Binding Path=StandardTokenTransferViewModel}" Grid.Row="2"/>
+		</Grid>
+	</rxui:RoutedViewHost.DefaultContent>
+</rxui:RoutedViewHost>
+
+</UserControl>

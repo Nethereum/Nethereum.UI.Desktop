@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Nethereum.UI.HostProvider\Nethereum.UI.HostProvider.csproj" />
     <ProjectReference Include="..\Nethereum.UI\Nethereum.UI.csproj" />
   </ItemGroup>
 
@@ -12,8 +13,8 @@
     <PackageReference Include="Genesis.Ensure" Version="2.0.0" />
     <PackageReference Include="Nethereum.HdWallet" Version="3.8.0" />
     <PackageReference Include="Nethereum.Web3" Version="3.8.0" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <PackageReference Include="ReactiveUI.Validation" Version="2.1.1" />
+	<PackageReference Include="ReactiveUI.Fody" Version="13.1.1" />
     <PackageReference Include="ReactiveUI" Version="13.1.1" />
   </ItemGroup>
-</Project>
+ </Project>

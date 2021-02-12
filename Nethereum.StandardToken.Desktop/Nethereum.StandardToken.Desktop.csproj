@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <AvaloniaXaml Include="StandardTokenBalanceOfUserControl.xaml" />
+    <AvaloniaXaml Include="StandardTokenTransferUserControl.xaml" />
+    <AvaloniaXaml Include="StandardTokenUserControl.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0" />
+    <PackageReference Include="Splat" Version="10.0.1" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nethereum.StandardToken.UI\Nethereum.StandardToken.UI.csproj" />
+    <ProjectReference Include="..\Nethereum.UI.Desktop.Common\Nethereum.UI.Desktop.Common.csproj" />
+  </ItemGroup>
+</Project>
