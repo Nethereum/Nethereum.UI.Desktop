@@ -45,7 +45,10 @@ namespace Nethereum.UI.ViewModels
             this.Gas = (ulong)transaction.Gas.Value;
             this.GasPrice = (ulong)transaction.GasPrice.Value;
             this.Data = transaction.Input;
-            this.BlockNumber = (ulong)transaction.BlockNumber.Value;
+            if (transaction.BlockNumber != null)
+            {
+                this.BlockNumber = (ulong)transaction.BlockNumber.Value;
+            }
             
             if (transaction.Value != null) this.Amount = Web3.Web3.Convert.FromWei(transaction.Value.Value);
         }

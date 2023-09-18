@@ -1,6 +1,7 @@
 using Genesis.Ensure;
 using Nethereum.Contracts;
 using Nethereum.Hex.HexTypes;
+using Nethereum.Model;
 using Nethereum.RPC.Eth.DTOs;
 using Nethereum.UI.HostProvider.Services;
 using ReactiveUI;
@@ -79,8 +80,8 @@ namespace Nethereum.UI.ViewModels
 
             this._confirmTransfer = new Interaction<string, bool>();
 
-            Gas = (ulong)Signer.Transaction.DEFAULT_GAS_LIMIT;
-            GasPrice = Web3.Web3.Convert.FromWei(Signer.Transaction.DEFAULT_GAS_PRICE, Nethereum.Util.UnitConversion.EthUnit.Gwei);
+            Gas = (ulong)SignedLegacyTransaction.DEFAULT_GAS_LIMIT;
+           // GasPrice = Web3.Web3.Convert.FromWei(Signer.Transaction.DEFAULT_GAS_PRICE, Nethereum.Util.UnitConversion.EthUnit.Gwei);
             
             this.ValidationRule(x => x.AddressTo, address => Util.Utils.IsValidAddress(address), "Address is not valid");
             this.ValidationRule(x => x.AmountInEther, amount => amount >= 0, "Amount cannot be negative");
@@ -107,7 +108,7 @@ namespace Nethereum.UI.ViewModels
         {
             if (amountInEther == 0) return  ValidationState.Valid;
             var web3 = await _ethereumHostProvider.GetWeb3Async();
-            var currentBalance = await web3.Eth.GetEtherTransferService().CalculateTotalAmountToTransferWholeBalanceInEther(Address,
+            var currentBalance = await web3.Eth.GetEtherTransferService().CalculateTotalAmountToTransferWholeBalanceInEtherAsync(Address,
                 gasPrice, gas);
             if(currentBalance < amountInEther)
             {

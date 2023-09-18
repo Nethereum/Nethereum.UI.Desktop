@@ -10,9 +10,7 @@ namespace Nethereum.StandardToken.Desktop
 {
     public class StandardTokenTransferUserControl : UserControl, IViewFor<StandardTokenTransferViewModel>
     {
-        private TextBlock ToValidation => this.FindControl<TextBlock>("ToValidation");
-        private TextBlock AmountValidation => this.FindControl<TextBlock>("AmountValidation");
-
+       
         public StandardTokenTransferUserControl()
         {
             this.InitializeComponent();

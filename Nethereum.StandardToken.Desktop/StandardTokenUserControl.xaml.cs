@@ -6,7 +6,7 @@ using System;
 
 namespace Nethereum.StandardToken.Desktop
 {
-    public class StandardTokenUserControl : UserControl, IViewFor<StandardTokenViewModel>
+    public partial class StandardTokenUserControl : UserControl, IViewFor<StandardTokenViewModel>
     {
         public StandardTokenUserControl()
         {

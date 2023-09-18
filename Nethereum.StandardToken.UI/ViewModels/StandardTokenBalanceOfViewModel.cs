@@ -9,7 +9,6 @@ using System;
 using System.Numerics;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 
 namespace Nethereum.StandardToken.UI.ViewModels

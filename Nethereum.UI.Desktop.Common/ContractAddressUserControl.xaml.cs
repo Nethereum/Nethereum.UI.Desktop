@@ -8,7 +8,7 @@ using System.Reactive.Disposables;
 
 namespace Nethereum.UI.Desktop.Common
 {
-    public class ContractAddressUserControl : UserControl, IViewFor<ContractAdddressViewModel>
+    public partial class ContractAddressUserControl : UserControl, IViewFor<ContractAdddressViewModel>
     {
         public ContractAddressUserControl()
         {

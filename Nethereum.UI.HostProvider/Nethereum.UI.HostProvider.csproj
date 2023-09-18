@@ -5,12 +5,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="11.0.4" />
 		<PackageReference Include="Genesis.Ensure" Version="2.0.0" />
-		<PackageReference Include="Nethereum.HdWallet" Version="3.8.0" />
-		<PackageReference Include="Nethereum.Web3" Version="3.8.0" />
-		<PackageReference Include="ReactiveUI.Fody" Version="13.1.1" />
-		<PackageReference Include="ReactiveUI.Validation" Version="2.1.1" />
-		<PackageReference Include="ReactiveUI" Version="13.1.1" />
+		<PackageReference Include="Nethereum.HdWallet" Version="4.16.0" />
+		<PackageReference Include="Nethereum.Web3" Version="4.16.0" />
+		<PackageReference Include="ReactiveUI.Fody" Version="19.4.1" />
+		<PackageReference Include="ReactiveUI.Validation" Version="3.1.7" />
+		<PackageReference Include="ReactiveUI" Version="19.4.1" />
 	</ItemGroup>
 
 	<ItemGroup>
